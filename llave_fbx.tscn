@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c6wyan248lgat"]
+
+[ext_resource type="PackedScene" uid="uid://ct1afl4p8lix" path="res://llave fbx.fbx" id="1_eanho"]
+
+[node name="llave fbx" instance=ExtResource("1_eanho")]
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
