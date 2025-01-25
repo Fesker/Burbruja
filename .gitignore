@@ -13,3 +13,6 @@ export_presets.cfg
 .mono/
 data_*/
 mono_crash.*.json
+tes3CFE.tmp
+tesA6D0.tmp
+tesC340.tmp
