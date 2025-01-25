@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://bn475m8wkk3d3"]
+
+[ext_resource type="PackedScene" uid="uid://cu7y8v02dsnxu" path="res://Assets/Gun_butfbx.fbx" id="1_y71vg"]
+
+[node name="Gun" instance=ExtResource("1_y71vg")]

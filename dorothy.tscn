@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://clmreqsd4oso0"]
+
+[ext_resource type="Script" path="res://Scripts/dorothy.gd" id="1_vo8d1"]
+[ext_resource type="PackedScene" uid="uid://bn475m8wkk3d3" path="res://gun.tscn" id="2_8d1si"]
+[ext_resource type="PackedScene" uid="uid://bhegvels08qru" path="res://input_component.tscn" id="2_b1ygk"]
+[ext_resource type="Script" path="res://Scripts/gun.gd" id="3_wni0g"]
+[ext_resource type="PackedScene" uid="uid://bb23nv32tmbnf" path="res://bubble_projectile.tscn" id="4_i5ngs"]
+[ext_resource type="Texture2D" uid="uid://b4vs15f6o82ur" path="res://Assets/Sprites/crosshair117.png" id="4_nj0ht"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wcbvj"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_q6i8f"]
+
+[node name="Dorothy" type="CharacterBody3D"]
+script = ExtResource("1_vo8d1")
+
+[node name="Camera" type="Camera3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.750023, -0.23405)
+current = true
+
+[node name="Gun" parent="Camera" instance=ExtResource("2_8d1si")]
+unique_name_in_owner = true
+transform = Transform3D(-100, 0, 8.74228e-06, 0, 100, 0, -8.74228e-06, 0, -100, 0.511893, -0.458019, -1.44839)
+script = ExtResource("3_wni0g")
+projectile_prefab = ExtResource("4_i5ngs")
+
+[node name="muzzle" type="Marker3D" parent="Camera/Gun"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-10, 0.0025704, 0.00783082)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_wcbvj")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_q6i8f")
+
+[node name="InputComponent" parent="." node_paths=PackedStringArray("camera", "player") instance=ExtResource("2_b1ygk")]
+camera = NodePath("../Camera")
+player = NodePath("..")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_nj0ht")
+expand_mode = 1
+
+[node name="ProjectilesContainer" type="Node3D" parent="."]
+unique_name_in_owner = true
