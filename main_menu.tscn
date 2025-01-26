@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=3 uid="uid://o81f15pyb636"]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_ggd3d"]
+[ext_resource type="Texture2D" uid="uid://drncshgfq7nod" path="res://Assets/Sprites/SplasHMENU.png" id="2_h8sxr"]
+[ext_resource type="Texture2D" uid="uid://312nkcp0lpg7" path="res://Assets/Sprites/Jugar UI.png" id="2_l6opr"]
+[ext_resource type="Texture2D" uid="uid://c6t37s1pmxxbj" path="res://Assets/Sprites/Salir UI.png" id="4_mj6dj"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uma2x"]
+texture = ExtResource("2_l6opr")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3ih3e"]
+texture = ExtResource("2_l6opr")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_opxv2"]
+texture = ExtResource("2_l6opr")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_1hnrw"]
+texture = ExtResource("4_mj6dj")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_3scbg"]
+texture = ExtResource("4_mj6dj")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5unkb"]
+texture = ExtResource("4_mj6dj")
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ggd3d")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1154.0
+offset_bottom = 649.0
+texture = ExtResource("2_h8sxr")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 950.97
+offset_top = 425.275
+offset_right = 1128.97
+offset_bottom = 626.275
+alignment = 1
+
+[node name="Play" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_uma2x")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_3ih3e")
+theme_override_styles/normal = SubResource("StyleBoxTexture_opxv2")
+action_mode = 0
+
+[node name="Quit" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/hover = SubResource("StyleBoxTexture_1hnrw")
+theme_override_styles/pressed = SubResource("StyleBoxTexture_3scbg")
+theme_override_styles/normal = SubResource("StyleBoxTexture_5unkb")
+
+[connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]

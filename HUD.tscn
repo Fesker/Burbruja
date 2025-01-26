@@ -1,0 +1,117 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmiym667dsq7"]
+
+[ext_resource type="Script" path="res://Scripts/hud.gd" id="1_fp17f"]
+[ext_resource type="Texture2D" uid="uid://c132bumpkyu6t" path="res://Assets/Sprites/boots.png" id="1_lh6aq"]
+[ext_resource type="Texture2D" uid="uid://cyfsk8sw2r1r3" path="res://Assets/Sprites/bruja UI.png" id="2_y0jnq"]
+[ext_resource type="FontFile" uid="uid://msub52i24tf1" path="res://Assets/MesintwaFont.ttf" id="3_yjpmm"]
+[ext_resource type="Texture2D" uid="uid://bfwq4n2nve3yx" path="res://Assets/Sprites/Burbujas UI.png" id="4_rjupl"]
+
+[node name="HUD" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_fp17f")
+
+[node name="Boots" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -88.0
+offset_top = 30.0
+offset_right = -31.0
+offset_bottom = 80.0
+grow_horizontal = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("1_lh6aq")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="ScoreTexture" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -76.83
+offset_top = 20.0
+offset_right = 34.17
+offset_bottom = 118.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_y0jnq")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="ScoreTexture"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 47.94
+offset_top = 24.145
+offset_right = 120.94
+offset_bottom = 66.145
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_yjpmm")
+theme_override_font_sizes/font_size = 23
+text = "x"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BrujasValue" type="Label" parent="ScoreTexture"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = 87.275
+offset_top = 24.145
+offset_right = 160.275
+offset_bottom = 66.145
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("3_yjpmm")
+theme_override_font_sizes/font_size = 40
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Detergent" type="TextureRect" parent="."]
+layout_mode = 1
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 135.0
+offset_bottom = 122.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("4_rjupl")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="Label3" type="Label" parent="Detergent"]
+layout_mode = 1
+offset_left = 108.0
+offset_top = 21.0
+offset_right = 181.0
+offset_bottom = 63.0
+theme_override_fonts/font = ExtResource("3_yjpmm")
+theme_override_font_sizes/font_size = 23
+text = "x"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DetergenteValue" type="Label" parent="Detergent"]
+layout_mode = 1
+offset_left = 158.0
+offset_top = 20.0
+offset_right = 231.0
+offset_bottom = 63.0
+theme_override_fonts/font = ExtResource("3_yjpmm")
+theme_override_font_sizes/font_size = 42
+text = "100"
+horizontal_alignment = 1
+vertical_alignment = 1

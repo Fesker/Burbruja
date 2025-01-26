@@ -1,11 +1,13 @@
 class_name Map extends Node3D
 
-#@export var spawn_points : Array[Area3D]
 @export var llave_scene : PackedScene
 @export var key_locations : Array[Marker3D]
+@export var hud_reference : Control
 
 
 var active_spawn_index := 0
+var score := 0
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
