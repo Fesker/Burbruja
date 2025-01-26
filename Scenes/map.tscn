@@ -21,6 +21,9 @@ glow_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bt16q"]
 albedo_color = Color(0.257741, 0.144362, 0.0759742, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m1m2h"]
+albedo_color = Color(0.329977, 0.186106, 0.0837595, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_123yg"]
 albedo_color = Color(0.44167, 0.304007, 1.92523e-07, 1)
 
@@ -506,6 +509,7 @@ size = Vector3(1, 1, 1.96735)
 
 [node name="Map" type="Node3D" node_paths=PackedStringArray("key_locations")]
 script = ExtResource("1_0iv75")
+
 llave_scene = ExtResource("2_c20w0")
 key_locations = [NodePath("KeySpawners/KeyLocation"), NodePath("KeySpawners/KeyLocation2"), NodePath("KeySpawners/KeyLocation3"), NodePath("KeySpawners/KeyLocation4"), NodePath("KeySpawners/KeyLocation5"), NodePath("KeySpawners/KeyLocation6"), NodePath("KeySpawners/KeyLocation7"), NodePath("KeySpawners/KeyLocation8"), NodePath("KeySpawners/KeyLocation9"), NodePath("KeySpawners/KeyLocation10")]
 
@@ -521,6 +525,7 @@ environment = SubResource("Environment_elxut")
 [node name="Floor" type="CSGBox3D" parent="Strucutre"]
 transform = Transform3D(0.933951, 0, 0, 0, 0.933951, 0, 0, 0, 0.980959, 0, 0, 0)
 size = Vector3(100, 0, 100)
+
 material = SubResource("StandardMaterial3D_bt16q")
 metadata/_edit_lock_ = true
 
