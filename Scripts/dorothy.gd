@@ -6,6 +6,7 @@ class_name Dorothy extends CharacterBody3D
 
 var current_speed : float = walk_speed
 
+var has_key := false
 @onready var camera: Camera3D = %Camera
 
 

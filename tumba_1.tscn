@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cow8waob6as5p"]
+
+[ext_resource type="PackedScene" uid="uid://baywyanv675im" path="res://Assets/tumba 1.fbx" id="1_nl8mv"]
+
+[node name="tumba 1" instance=ExtResource("1_nl8mv")]
+
+[node name="TUMBA 1" parent="." index="0"]
+transform = Transform3D(20, -5.21136e-06, 7.97214e-14, 0, 2.60568e-06, 20.862, 1.74846e-06, 59.611, -9.11907e-07, 0, -1, 0)

@@ -4,7 +4,7 @@ class_name Map extends Node3D
 @export var key_locations : Array[Marker3D]
 @export var hud_reference : Control
 
-var active_key := false
+
 var active_spawn_index := 0
 var score := 0
 
@@ -35,5 +35,5 @@ func _process(_delta: float) -> void:
 		#key_is_active()
 		#print("El jugador agarro la llave")
 	
-func key_is_active ():
-	active_key = true
+#func key_is_active ():
+	#active_key = true
