@@ -20,6 +20,8 @@ config/icon="res://icon.svg"
 player=""
 enemy=""
 player_projectile=""
+small_tumb=""
+big_tumb=""
 
 [input]
 
@@ -59,3 +61,4 @@ shoot={
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Enemies"
 3d_physics/layer_4="PlayerProjectiles"
+3d_physics/layer_5="interactuable"

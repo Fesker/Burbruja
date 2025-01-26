@@ -8,12 +8,15 @@
 [ext_resource type="Texture2D" uid="uid://b4vs15f6o82ur" path="res://Assets/Sprites/crosshair117.png" id="4_nj0ht"]
 [ext_resource type="PackedScene" uid="uid://dun0hbxgtgfo0" path="res://music_manger.tscn" id="7_dsxod"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wcbvj"]
-
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_q6i8f"]
 
-[node name="Dorothy" type="CharacterBody3D"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wcbvj"]
+
+[node name="Dorothy" type="CharacterBody3D" groups=["player"]]
+collision_layer = 2
+collision_mask = 17
 script = ExtResource("1_vo8d1")
+walk_speed = 20.0
 
 [node name="Camera" type="Camera3D" parent="."]
 unique_name_in_owner = true
@@ -29,9 +32,6 @@ projectile_prefab = ExtResource("4_i5ngs")
 [node name="muzzle" type="Marker3D" parent="Camera/Gun"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-10, 0.0025704, 0.00783082)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_wcbvj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_q6i8f")
