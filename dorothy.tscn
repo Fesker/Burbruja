@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://clmreqsd4oso0"]
+[gd_scene load_steps=10 format=3 uid="uid://clmreqsd4oso0"]
 
 [ext_resource type="Script" path="res://Scripts/dorothy.gd" id="1_vo8d1"]
 [ext_resource type="PackedScene" uid="uid://bn475m8wkk3d3" path="res://gun.tscn" id="2_8d1si"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Scripts/gun.gd" id="3_wni0g"]
 [ext_resource type="PackedScene" uid="uid://bb23nv32tmbnf" path="res://bubble_projectile.tscn" id="4_i5ngs"]
 [ext_resource type="Texture2D" uid="uid://b4vs15f6o82ur" path="res://Assets/Sprites/crosshair117.png" id="4_nj0ht"]
+[ext_resource type="PackedScene" uid="uid://dun0hbxgtgfo0" path="res://music_manger.tscn" id="7_dsxod"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wcbvj"]
 
@@ -58,3 +59,5 @@ expand_mode = 1
 
 [node name="ProjectilesContainer" type="Node3D" parent="."]
 unique_name_in_owner = true
+
+[node name="MusicManger" parent="." instance=ExtResource("7_dsxod")]

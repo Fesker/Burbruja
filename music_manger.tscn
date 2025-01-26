@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dun0hbxgtgfo0"]
+
+[ext_resource type="AudioStream" uid="uid://172p64c5en6w" path="res://Assets/Audio/Burbrujas Main Stage Soundtrack.mp3" id="1_cmbiq"]
+
+[node name="MusicManger" type="Node"]
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("1_cmbiq")
+autoplay = true

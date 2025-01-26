@@ -6,14 +6,29 @@ extends CharacterBody3D
 @export var attack_damage: int = 20
 @export var attack_cooldown: float = 1.5
 
+@export var life := 5
+
+
 var player: Node3D
 var can_attack: bool = true
+var min_scream_time := 5.0
+var max_scream_time := 10.0
+var scream_time
 
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
+@onready var audio_stream: AudioStreamPlayer3D = $AudioStream
+@onready var timer: Timer = $Timer
+
 
 func _ready():
 	animation_player.play("idle")
 	player = get_tree().get_first_node_in_group("player")
+	var scream_time = randf_range(min_scream_time,max_scream_time)
+	timer.wait_time =scream_time
+
+func scream():
+	audio_stream.play()
+	timer.wait_time = randf_range(min_scream_time,max_scream_time)
 
 func _physics_process(delta):
 	look_at(player.position)
@@ -49,3 +64,13 @@ func take_damage(damage_amount: int):
 	# Enemy health logic
 	print("Enemy took %d damage" % damage_amount)
 	# Add health reduction, death check, etc.
+
+
+func _on_timer_timeout() -> void:
+	scream()
+
+func recibir_danio() -> void:
+	life -= 1
+	print("VIDA RESTANTE: ", life)
+	if life <= 0:
+		queue_free()

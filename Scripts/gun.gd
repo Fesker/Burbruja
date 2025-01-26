@@ -27,7 +27,7 @@ func shoot_projectile():
 		return
 	
 	var projectile = projectile_prefab.instantiate()
-	projectile.global_position = muzzle.global_position
+	projectile.position = muzzle.global_position
 	
 	# Assign Projectile Direction
 	projectile.set_direction(-camera.global_transform.basis.z)

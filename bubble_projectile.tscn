@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bb23nv32tmbnf"]
+[gd_scene load_steps=6 format=3 uid="uid://bb23nv32tmbnf"]
 
 [ext_resource type="Script" path="res://Scripts/bubble_projectile.gd" id="1_genpp"]
+[ext_resource type="AudioStream" uid="uid://d0ipjfljweiyj" path="res://Assets/Audio/bubble.mp3" id="2_lidrt"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1opo8"]
 transparency = 1
@@ -18,10 +19,11 @@ material = SubResource("StandardMaterial3D_1opo8")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_fqudp"]
 
-[node name="BubbleProjectile" type="Node3D" groups=["enemy", "player"]]
+[node name="BubbleProjectile" type="Node3D" groups=["player_projectile"]]
 top_level = true
 script = ExtResource("1_genpp")
 speed = 20
+fireAudio = ExtResource("2_lidrt")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("SphereMesh_q7its")
@@ -29,9 +31,11 @@ mesh = SubResource("SphereMesh_q7its")
 [node name="ProjectileAudio" type="AudioStreamPlayer3D" parent="."]
 unique_name_in_owner = true
 
-[node name="Area3D" type="Area3D" parent="."]
-collision_layer = 8
+[node name="Area3D" type="Area3D" parent="." groups=["player_projectile"]]
+collision_layer = 0
 collision_mask = 5
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" groups=["player_projectile"]]
 shape = SubResource("SphereShape3D_fqudp")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
