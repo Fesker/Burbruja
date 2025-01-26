@@ -1,7 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://db8v4p0g37huy"]
+[gd_scene load_steps=22 format=3 uid="uid://db8v4p0g37huy"]
 
 [ext_resource type="Script" path="res://Scenes/map.gd" id="1_0iv75"]
 [ext_resource type="PackedScene" uid="uid://dbdr87pl5skg3" path="res://key_spawn.tscn" id="2_yxc76"]
+[ext_resource type="PackedScene" uid="uid://dnw5cf7km23yc" path="res://bruja.tscn" id="3_fv3du"]
+[ext_resource type="PackedScene" uid="uid://clmreqsd4oso0" path="res://dorothy.tscn" id="3_xtsfn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cyt20"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -17,6 +19,9 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_n7n0v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m1m2h"]
+albedo_color = Color(0.329977, 0.186106, 0.0837595, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_123yg"]
 albedo_color = Color(0.44167, 0.304007, 1.92523e-07, 1)
@@ -62,7 +67,7 @@ size = Vector3(0.1, 0.75, 0.5)
 
 [node name="Map" type="Node3D" node_paths=PackedStringArray("spawn_points")]
 script = ExtResource("1_0iv75")
-spawn_points = [NodePath("KeySpawn"), NodePath("KeySpawn2"), NodePath("KeySpawn3"), NodePath("KeySpawn4"), NodePath("KeySpawn5"), NodePath("KeySpawn6"), NodePath("KeySpawn7"), NodePath("KeySpawn8"), NodePath("KeySpawn9"), NodePath("KeySpawn10")]
+spawn_points = [NodePath("SpawnsLlave/KeySpawn"), NodePath("SpawnsLlave/KeySpawn2"), NodePath("SpawnsLlave/KeySpawn3"), NodePath("SpawnsLlave/KeySpawn4"), NodePath("SpawnsLlave/KeySpawn5"), NodePath("SpawnsLlave/KeySpawn6"), NodePath("SpawnsLlave/KeySpawn7"), NodePath("SpawnsLlave/KeySpawn8"), NodePath("SpawnsLlave/KeySpawn9"), NodePath("SpawnsLlave/KeySpawn10")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.821149, -0.567483, 0.0606463, 0, 0.106264, 0.994338, -0.570714, 0.8165, -0.0872586, -3.97913, 19.3788, 0)
@@ -80,6 +85,7 @@ mesh = SubResource("CapsuleMesh_n7n0v")
 [node name="Floor" type="CSGBox3D" parent="Strucutre"]
 transform = Transform3D(0.933951, 0, 0, 0, 0.933951, 0, 0, 0, 0.980959, 0, 0, 0)
 size = Vector3(100, 0, 100)
+material = SubResource("StandardMaterial3D_m1m2h")
 metadata/_edit_lock_ = true
 
 [node name="Wall" type="CSGBox3D" parent="Strucutre"]
@@ -8936,65 +8942,70 @@ transform = Transform3D(0.999994, 0, 0.00354301, 0, 1, 0, -0.00354301, 0, 0.9999
 mesh = SubResource("BoxMesh_ryy4i")
 skeleton = NodePath("../../..")
 
-[node name="KeySpawn" parent="." instance=ExtResource("2_yxc76")]
+[node name="SpawnsLlave" type="Node3D" parent="."]
+
+[node name="KeySpawn" parent="SpawnsLlave" instance=ExtResource("2_yxc76")]
 monitoring = false
 monitorable = false
 
-[node name="KeySpawn2" parent="." instance=ExtResource("2_yxc76")]
+[node name="KeySpawn2" parent="SpawnsLlave" instance=ExtResource("2_yxc76")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.5, 0.27, 44.5)
 monitoring = false
 monitorable = false
 
-[node name="KeySpawn3" parent="." instance=ExtResource("2_yxc76")]
+[node name="KeySpawn3" parent="SpawnsLlave" instance=ExtResource("2_yxc76")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9, 0.27, -38)
 monitoring = false
 monitorable = false
 
-[node name="KeySpawn4" parent="." instance=ExtResource("2_yxc76")]
+[node name="KeySpawn4" parent="SpawnsLlave" instance=ExtResource("2_yxc76")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43, 0.27, -47)
 monitoring = false
 monitorable = false
 
-[node name="KeySpawn5" parent="." instance=ExtResource("2_yxc76")]
+[node name="KeySpawn5" parent="SpawnsLlave" instance=ExtResource("2_yxc76")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23, 0.27, -47)
 monitoring = false
 monitorable = false
 
-[node name="KeySpawn6" parent="." instance=ExtResource("2_yxc76")]
+[node name="KeySpawn6" parent="SpawnsLlave" instance=ExtResource("2_yxc76")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.5, 0.27, -35)
 monitoring = false
 monitorable = false
 
-[node name="KeySpawn7" parent="." instance=ExtResource("2_yxc76")]
+[node name="KeySpawn7" parent="SpawnsLlave" instance=ExtResource("2_yxc76")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -27.5, 0.27, 47)
 monitoring = false
 monitorable = false
 
-[node name="KeySpawn8" parent="." instance=ExtResource("2_yxc76")]
+[node name="KeySpawn8" parent="SpawnsLlave" instance=ExtResource("2_yxc76")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0.27, 30.5)
 monitoring = false
 monitorable = false
 
-[node name="KeySpawn9" parent="." instance=ExtResource("2_yxc76")]
+[node name="KeySpawn9" parent="SpawnsLlave" instance=ExtResource("2_yxc76")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.5, 0.27, 13.5)
 monitoring = false
 monitorable = false
 
-[node name="KeySpawn10" parent="." instance=ExtResource("2_yxc76")]
+[node name="KeySpawn10" parent="SpawnsLlave" instance=ExtResource("2_yxc76")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.5, 0.27, 47)
 monitoring = false
 monitorable = false
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.0820437, 0.104327, -0.991153, -0.0564836, 0.993394, 0.0998872, 0.995027, 0.0477888, 0.0873945, -68.2698, 25.5765, 0)
+[node name="Dorothy" parent="." groups=["player"] instance=ExtResource("3_xtsfn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3847, 1, 10.3099)
 
-[connection signal="body_entered" from="KeySpawn" to="." method="_on_key_spawn_body_entered"]
-[connection signal="body_entered" from="KeySpawn2" to="." method="_on_key_spawn_body_entered"]
-[connection signal="body_entered" from="KeySpawn3" to="." method="_on_key_spawn_body_entered"]
-[connection signal="body_entered" from="KeySpawn4" to="." method="_on_key_spawn_body_entered"]
-[connection signal="body_entered" from="KeySpawn5" to="." method="_on_key_spawn_body_entered"]
-[connection signal="body_entered" from="KeySpawn6" to="." method="_on_key_spawn_body_entered"]
-[connection signal="body_entered" from="KeySpawn7" to="." method="_on_key_spawn_body_entered"]
-[connection signal="body_entered" from="KeySpawn8" to="." method="_on_key_spawn_body_entered"]
-[connection signal="body_entered" from="KeySpawn9" to="." method="_on_key_spawn_body_entered"]
-[connection signal="body_entered" from="KeySpawn10" to="." method="_on_key_spawn_body_entered"]
+[node name="Bruja" parent="." groups=["enemy"] instance=ExtResource("3_fv3du")]
+transform = Transform3D(-10, 0, -8.74228e-07, 0, 10, 0, 8.74228e-07, 0, -10, -10.5759, 1, 1.99431)
+
+[connection signal="body_entered" from="SpawnsLlave/KeySpawn" to="." method="_on_key_spawn_body_entered"]
+[connection signal="body_entered" from="SpawnsLlave/KeySpawn2" to="." method="_on_key_spawn_body_entered"]
+[connection signal="body_entered" from="SpawnsLlave/KeySpawn3" to="." method="_on_key_spawn_body_entered"]
+[connection signal="body_entered" from="SpawnsLlave/KeySpawn4" to="." method="_on_key_spawn_body_entered"]
+[connection signal="body_entered" from="SpawnsLlave/KeySpawn5" to="." method="_on_key_spawn_body_entered"]
+[connection signal="body_entered" from="SpawnsLlave/KeySpawn6" to="." method="_on_key_spawn_body_entered"]
+[connection signal="body_entered" from="SpawnsLlave/KeySpawn7" to="." method="_on_key_spawn_body_entered"]
+[connection signal="body_entered" from="SpawnsLlave/KeySpawn8" to="." method="_on_key_spawn_body_entered"]
+[connection signal="body_entered" from="SpawnsLlave/KeySpawn9" to="." method="_on_key_spawn_body_entered"]
+[connection signal="body_entered" from="SpawnsLlave/KeySpawn10" to="." method="_on_key_spawn_body_entered"]
