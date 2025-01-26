@@ -1,6 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://c6wyan248lgat"]
+[gd_scene load_steps=4 format=3 uid="uid://c6wyan248lgat"]
 
 [ext_resource type="PackedScene" uid="uid://ct1afl4p8lix" path="res://llave fbx.fbx" id="1_eanho"]
+[ext_resource type="Script" path="res://llave.gd" id="2_ld74w"]
 
-[node name="llave fbx" instance=ExtResource("1_eanho")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_gakwp"]
+size = Vector3(100, 100, 100)
+
+[node name="llave" instance=ExtResource("1_eanho")]
 transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
+script = ExtResource("2_ld74w")
+
+[node name="LLAVE" parent="." index="0"]
+transform = Transform3D(0.000150996, 9.06802e-05, 2000, 3.55271e-12, 2074.52, -8.74228e-05, -2000, 1.05313e-11, 0.000150996, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="." index="1"]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+shape = SubResource("BoxShape3D_gakwp")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
