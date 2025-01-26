@@ -1,10 +1,11 @@
-[gd_scene load_steps=169 format=3 uid="uid://db8v4p0g37huy"]
+[gd_scene load_steps=170 format=3 uid="uid://db8v4p0g37huy"]
 
 [ext_resource type="Script" path="res://Scenes/map.gd" id="1_0iv75"]
 [ext_resource type="PackedScene" uid="uid://c6wyan248lgat" path="res://llave_fbx.tscn" id="2_c20w0"]
 [ext_resource type="PackedScene" uid="uid://clmreqsd4oso0" path="res://dorothy.tscn" id="3_0xqkc"]
 [ext_resource type="Script" path="res://Scenes/replace_tumbs.gd" id="4_m2ypc"]
 [ext_resource type="PackedScene" uid="uid://bw1r712xruexa" path="res://bruja.tscn" id="5_ygojk"]
+[ext_resource type="PackedScene" uid="uid://bmiym667dsq7" path="res://HUD.tscn" id="6_pqykl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cyt20"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -505,10 +506,11 @@ size = Vector3(1, 1, 1.96185)
 [sub_resource type="BoxShape3D" id="BoxShape3D_7ghc4"]
 size = Vector3(1, 1, 1.96735)
 
-[node name="Map" type="Node3D" node_paths=PackedStringArray("key_locations")]
+[node name="Map" type="Node3D" node_paths=PackedStringArray("key_locations", "hud_reference")]
 script = ExtResource("1_0iv75")
 llave_scene = ExtResource("2_c20w0")
 key_locations = [NodePath("KeySpawners/KeyLocation"), NodePath("KeySpawners/KeyLocation2"), NodePath("KeySpawners/KeyLocation3"), NodePath("KeySpawners/KeyLocation4"), NodePath("KeySpawners/KeyLocation5"), NodePath("KeySpawners/KeyLocation6"), NodePath("KeySpawners/KeyLocation7"), NodePath("KeySpawners/KeyLocation8"), NodePath("KeySpawners/KeyLocation9"), NodePath("KeySpawners/KeyLocation10")]
+hud_reference = NodePath("HUD")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.821149, -0.567483, 0.0606463, 0, 0.106264, 0.994338, -0.570714, 0.8165, -0.0872586, -3.97913, 19.3788, 0)
@@ -10253,3 +10255,8 @@ script = ExtResource("4_m2ypc")
 [node name="Bruja" parent="." instance=ExtResource("5_ygojk")]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 3.22666, 0.654417, 0.706043)
 attack_range = 2.0
+
+[node name="HUD" parent="." node_paths=PackedStringArray("gun") instance=ExtResource("6_pqykl")]
+gun = NodePath("../Dorothy/Camera/Gun")
+
+[editable path="Dorothy"]

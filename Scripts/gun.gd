@@ -55,10 +55,6 @@ func add_detergent(value: float) -> void:
 func reduce_detergent() ->void:
 	detergent -= 1
 	s_reduce_detergent.emit()
-	# Llamar de esta forma
-	#s_reduce_detergent.connect(
-	#Callable(on_reduce_detergent)
-	#.bind(value))
 	if detergent <= 0:
 		print("NO HAY DETERGENTE!")
 		s_no_detergent.emit()
