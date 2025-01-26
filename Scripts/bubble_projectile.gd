@@ -13,6 +13,7 @@ var direction
 
 func _ready() -> void:
 	audio_player.stream = fireAudio
+	audio_player.play()
 	setup_timer()
 
 
@@ -30,3 +31,8 @@ func setup_timer() -> void:
 	projectile_timer.one_shot = true  # Only trigger once
 	projectile_timer.start()
 	projectile_timer.timeout.connect(func(): queue_free())
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body.is_in_group("enemy"):
+		body.recibir_danio()

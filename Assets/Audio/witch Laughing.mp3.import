@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dx2kko1qrqyt6"
+path="res://.godot/imported/witch Laughing.mp3-c1156f010604aae3ad61eee07100d77b.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/witch Laughing.mp3"
+dest_files=["res://.godot/imported/witch Laughing.mp3-c1156f010604aae3ad61eee07100d77b.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
