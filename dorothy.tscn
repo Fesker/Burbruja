@@ -10,7 +10,7 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_q6i8f"]
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wcbvj"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_40hu0"]
 
 [node name="Dorothy" type="CharacterBody3D" groups=["player"]]
 collision_layer = 2
@@ -61,3 +61,6 @@ expand_mode = 1
 unique_name_in_owner = true
 
 [node name="MusicManger" parent="." instance=ExtResource("7_dsxod")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_40hu0")

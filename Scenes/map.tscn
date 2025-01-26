@@ -1,9 +1,10 @@
-[gd_scene load_steps=168 format=3 uid="uid://db8v4p0g37huy"]
+[gd_scene load_steps=169 format=3 uid="uid://db8v4p0g37huy"]
 
 [ext_resource type="Script" path="res://Scenes/map.gd" id="1_0iv75"]
 [ext_resource type="PackedScene" uid="uid://c6wyan248lgat" path="res://llave_fbx.tscn" id="2_c20w0"]
 [ext_resource type="PackedScene" uid="uid://clmreqsd4oso0" path="res://dorothy.tscn" id="3_0xqkc"]
 [ext_resource type="Script" path="res://Scenes/replace_tumbs.gd" id="4_m2ypc"]
+[ext_resource type="PackedScene" uid="uid://bw1r712xruexa" path="res://bruja.tscn" id="5_ygojk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cyt20"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -20,9 +21,6 @@ glow_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bt16q"]
 albedo_color = Color(0.257741, 0.144362, 0.0759742, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m1m2h"]
-albedo_color = Color(0.329977, 0.186106, 0.0837595, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_123yg"]
 albedo_color = Color(0.44167, 0.304007, 1.92523e-07, 1)
@@ -509,7 +507,6 @@ size = Vector3(1, 1, 1.96735)
 
 [node name="Map" type="Node3D" node_paths=PackedStringArray("key_locations")]
 script = ExtResource("1_0iv75")
-
 llave_scene = ExtResource("2_c20w0")
 key_locations = [NodePath("KeySpawners/KeyLocation"), NodePath("KeySpawners/KeyLocation2"), NodePath("KeySpawners/KeyLocation3"), NodePath("KeySpawners/KeyLocation4"), NodePath("KeySpawners/KeyLocation5"), NodePath("KeySpawners/KeyLocation6"), NodePath("KeySpawners/KeyLocation7"), NodePath("KeySpawners/KeyLocation8"), NodePath("KeySpawners/KeyLocation9"), NodePath("KeySpawners/KeyLocation10")]
 
@@ -525,7 +522,6 @@ environment = SubResource("Environment_elxut")
 [node name="Floor" type="CSGBox3D" parent="Strucutre"]
 transform = Transform3D(0.933951, 0, 0, 0, 0.933951, 0, 0, 0, 0.980959, 0, 0, 0)
 size = Vector3(100, 0, 100)
-
 material = SubResource("StandardMaterial3D_bt16q")
 metadata/_edit_lock_ = true
 
@@ -10253,3 +10249,7 @@ walk_speed = 15.0
 
 [node name="Node3D" type="Node3D" parent="."]
 script = ExtResource("4_m2ypc")
+
+[node name="Bruja" parent="." instance=ExtResource("5_ygojk")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 3.22666, 0.654417, 0.706043)
+attack_range = 2.0

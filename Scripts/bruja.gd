@@ -11,20 +11,22 @@ extends CharacterBody3D
 
 var player: Node3D
 var can_attack: bool = true
-var min_scream_time := 5.0
-var max_scream_time := 10.0
-var scream_time
+@export var min_scream_time := 5.0
+@export var max_scream_time := 10.0
+@export var scream_time := 0.0
 
 @onready var animation_player: AnimationPlayer = %AnimationPlayer
 @onready var audio_stream: AudioStreamPlayer3D = $AudioStream
 @onready var timer: Timer = $Timer
+
+signal enemy_died
 
 
 func _ready():
 	animation_player.play("idle")
 	player = get_tree().get_first_node_in_group("player")
 	var scream_time = randf_range(min_scream_time,max_scream_time)
-	timer.wait_time =scream_time
+	timer.wait_time = scream_time
 
 func scream():
 	audio_stream.play()
@@ -73,4 +75,9 @@ func recibir_danio() -> void:
 	life -= 1
 	print("VIDA RESTANTE: ", life)
 	if life <= 0:
-		queue_free()
+		die()
+		
+		
+func die():
+	enemy_died.emit()
+	queue_free()
