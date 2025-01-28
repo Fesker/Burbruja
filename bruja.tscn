@@ -29,7 +29,8 @@ resource_name = "greenwitch"
 vertex_color_use_as_albedo = true
 albedo_color = Color(0.288683, 0.688654, 0.318471, 1)
 emission_enabled = true
-emission_energy_multiplier = 0.0
+emission = Color(0.297508, 0.908582, 0, 1)
+emission_energy_multiplier = 0.72
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_1im1o"]
 resource_name = "pCube2"

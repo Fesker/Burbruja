@@ -2,7 +2,7 @@ class_name Map extends Node3D
 
 @export var llave_scene : PackedScene
 @export var key_locations : Array[Marker3D]
-@export var hud_reference : Control
+#@export var hud_reference : Control
 
 
 var active_spawn_index := 0

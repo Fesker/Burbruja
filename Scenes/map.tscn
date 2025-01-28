@@ -1,13 +1,17 @@
-[gd_scene load_steps=53 format=3 uid="uid://db8v4p0g37huy"]
+[gd_scene load_steps=57 format=3 uid="uid://db8v4p0g37huy"]
 
 [ext_resource type="Script" path="res://Scenes/map.gd" id="1_0iv75"]
 [ext_resource type="PackedScene" uid="uid://c6wyan248lgat" path="res://llave_fbx.tscn" id="2_c20w0"]
 [ext_resource type="PackedScene" uid="uid://clmreqsd4oso0" path="res://dorothy.tscn" id="3_0xqkc"]
 [ext_resource type="Script" path="res://Scenes/door_3.gd" id="3_y3kgs"]
-[ext_resource type="Script" path="res://Scenes/replace_tumbs.gd" id="4_m2ypc"]
 [ext_resource type="PackedScene" uid="uid://bw1r712xruexa" path="res://bruja.tscn" id="5_ygojk"]
 [ext_resource type="PackedScene" uid="uid://hd2f8agfmfun" path="res://tumba_2.tscn" id="6_d04bj"]
 [ext_resource type="PackedScene" uid="uid://cow8waob6as5p" path="res://tumba_1.tscn" id="7_qnhqe"]
+[ext_resource type="PackedScene" uid="uid://cka73ixxpf5hq" path="res://Assets/Arboles.fbx" id="9_keb2p"]
+[ext_resource type="PackedScene" uid="uid://di22ftkc8m11r" path="res://Assets/cauldron.fbx" id="10_yuxhk"]
+[ext_resource type="PackedScene" uid="uid://cbinvh6iljoau" path="res://Assets/detergente 1.fbx" id="11_kadhj"]
+[ext_resource type="PackedScene" uid="uid://bnotmg3sdlrpk" path="res://Assets/door.fbx" id="12_ybbg0"]
+[ext_resource type="PackedScene" uid="uid://xtac046v0rgo" path="res://Assets/door_frame.fbx" id="13_jt3wt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cyt20"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -17,10 +21,12 @@ ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
 sky_material = SubResource("ProceduralSkyMaterial_cyt20")
 
 [sub_resource type="Environment" id="Environment_elxut"]
-background_mode = 2
+background_mode = 1
 sky = SubResource("Sky_4e30j")
 tonemap_mode = 2
 glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0.34838, 0.00050879, 0.459709, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bt16q"]
 albedo_color = Color(0.257741, 0.144362, 0.0759742, 1)
@@ -36,16 +42,6 @@ size = Vector3(0.503418, 1, 52.9229)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yoy21"]
 size = Vector3(0.495361, 1, 53.3446)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1wp4g"]
-albedo_color = Color(0.443137, 0.305882, 0, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_7qdy4"]
-material = SubResource("StandardMaterial3D_1wp4g")
-size = Vector3(0.2, 4.5, 3)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_eaw5y"]
-size = Vector3(1.08386, 1.9425, 3.05905)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wd057"]
 size = Vector3(4.95105, 1, 10.2671)
@@ -146,6 +142,19 @@ size = Vector3(1, 1, 7.14453)
 [sub_resource type="BoxShape3D" id="BoxShape3D_3uy64"]
 size = Vector3(1, 1, 1.96185)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_eaw5y"]
+size = Vector3(1.91998, 1.9425, 3.05905)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q1kce"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 5.14
+
+[sub_resource type="SphereMesh" id="SphereMesh_0p0rg"]
+material = SubResource("StandardMaterial3D_q1kce")
+radius = 10.0
+height = 20.0
+
 [node name="Map" type="Node3D" node_paths=PackedStringArray("key_locations")]
 script = ExtResource("1_0iv75")
 llave_scene = ExtResource("2_c20w0")
@@ -153,7 +162,14 @@ key_locations = [NodePath("KeySpawners/KeyLocation2"), NodePath("KeySpawners/Key
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.821149, -0.567483, 0.0606463, 0, 0.106264, 0.994338, -0.570714, 0.8165, -0.0872586, -3.97913, 19.3788, 0)
+light_color = Color(0.593084, 0.000220631, 0.581084, 1)
+light_energy = 0.129
 shadow_enabled = true
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.258819, 0.965926, 0, -0.965926, -0.258819, 0, 0, 0)
+light_color = Color(0, 0.397615, 0.71036, 1)
+light_energy = 0.129
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_elxut")
@@ -197,8 +213,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.248291, 0, 0.295654)
 shape = SubResource("BoxShape3D_qsj4t")
 
 [node name="Wall4" type="CSGBox3D" parent="Strucutre"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 23.3567, 1, 48.9696)
-size = Vector3(0, 2, 47.2866)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 11.2134, 1, 48.9696)
+size = Vector3(0, 2, 23)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Strucutre/Wall4"]
 
@@ -206,19 +222,15 @@ size = Vector3(0, 2, 47.2866)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.218872, 0, 1.80428)
 shape = SubResource("BoxShape3D_yoy21")
 
-[node name="Door3" type="MeshInstance3D" parent="Strucutre"]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 28.3309, 1, 48.9037)
-mesh = SubResource("BoxMesh_7qdy4")
-skeleton = NodePath("../..")
-script = ExtResource("3_y3kgs")
+[node name="Wall5" type="CSGBox3D" parent="Strucutre"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 37.7134, 1, 48.9696)
+size = Vector3(0, 2, 26)
 
-[node name="Area3D" type="Area3D" parent="Strucutre/Door3"]
-collision_layer = 17
-collision_mask = 2
+[node name="StaticBody3D" type="StaticBody3D" parent="Strucutre/Wall5"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Strucutre/Door3/Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0419312, 0.471252, -0.0384369)
-shape = SubResource("BoxShape3D_eaw5y")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Strucutre/Wall5/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.218872, 0, 1.80428)
+shape = SubResource("BoxShape3D_yoy21")
 
 [node name="WestSideMap" type="Node3D" parent="Strucutre"]
 
@@ -1301,869 +1313,1122 @@ shape = SubResource("BoxShape3D_3uy64")
 [node name="KeySpawners" type="Node3D" parent="."]
 
 [node name="KeyLocation2" type="Marker3D" parent="KeySpawners"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 42.5, 0.595221, 44.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 39.7429, 0.595221, 45.4449)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="KeySpawners/KeyLocation2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.115757, 0)
+light_color = Color(0, 0.655359, 0.372938, 1)
+light_energy = 1.981
+omni_range = 2.022
 
 [node name="KeyLocation8" type="Marker3D" parent="KeySpawners"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.70158, 0.452828, 29.4266)
 
+[node name="OmniLight3D2" type="OmniLight3D" parent="KeySpawners/KeyLocation8"]
+light_color = Color(0, 0.655359, 0.372938, 1)
+light_energy = 1.981
+omni_range = 2.022
+
 [node name="KeyLocation9" type="Marker3D" parent="KeySpawners"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.5, 0.4425, 13.5)
 
+[node name="OmniLight3D3" type="OmniLight3D" parent="KeySpawners/KeyLocation9"]
+light_color = Color(0, 0.655359, 0.372938, 1)
+light_energy = 1.981
+omni_range = 2.022
+
 [node name="Dorothy" parent="." instance=ExtResource("3_0xqkc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.2981, 1.24146, 23.6966)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.2981, 1.00536, 23.6966)
 walk_speed = 15.0
 
-[node name="Node3D" type="Node3D" parent="."]
-script = ExtResource("4_m2ypc")
+[node name="Tumbas" type="Node3D" parent="."]
 
-[node name="Bruja" parent="." instance=ExtResource("5_ygojk")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 3.22666, 0.654417, 8.68499)
-attack_range = 2.0
-
-[node name="tumba 1" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 1" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.905776, 0, 0.423757, 0, 1, 0, -0.423757, 0, 0.905776, 33.2506, 1.14318, 22.109)
 
-[node name="tumba 2" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 2" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.905776, 0, 0.423757, 0, 1, 0, -0.423757, 0, 0.905776, 34.4229, 1.14318, 24.6188)
 
-[node name="tumba 3" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 3" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.905776, 0, 0.423757, 0, 1, 0, -0.423757, 0, 0.905776, 35.5908, 1.14318, 27.0813)
 
-[node name="tumba 4" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 4" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.905776, 0, 0.423757, 0, 1, 0, -0.423757, 0, 0.905776, 36.9794, 1.14318, 29.8328)
 
-[node name="tumba 5" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 5" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.905776, 0, 0.423757, 0, 1, 0, -0.423757, 0, 0.905776, 38.2655, 1.14318, 32.576)
 
-[node name="tumba 6" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 6" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.905776, 0, 0.423757, 0, 1, 0, -0.423757, 0, 0.905776, 39.7004, 1.14318, 35.2396)
 
-[node name="tumba 7" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 7" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.905776, 0, 0.423757, 0, 1, 0, -0.423757, 0, 0.905776, 39.7004, 1.14318, 36.8846)
 
-[node name="tumba 8" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 8" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.905776, 0, 0.423757, 0, 1, 0, -0.423757, 0, 0.905776, 38.4511, 1.14318, 34.5265)
 
-[node name="tumba 9" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 9" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.905776, 0, 0.423757, 0, 1, 0, -0.423757, 0, 0.905776, 37.0377, 1.14318, 31.6904)
 
-[node name="tumba 10" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 10" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.905776, 0, 0.423757, 0, 1, 0, -0.423757, 0, 0.905776, 35.8786, 1.14318, 29.2556)
 
-[node name="tumba 11" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 11" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.905776, 0, 0.423757, 0, 1, 0, -0.423757, 0, 0.905776, 34.6565, 1.14318, 26.1338)
 
-[node name="tumba 12" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 12" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.905776, 0, 0.423757, 0, 1, 0, -0.423757, 0, 0.905776, 33.2438, 1.14318, 23.7604)
 
-[node name="tumba 13" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 13" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.7879, 1.09421, 41.7548)
 
-[node name="tumba 14" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 14" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.3314, 0.384871, 40.5724)
 
-[node name="tumba 15" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 15" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.3314, 0.384871, 41.7361)
 
-[node name="tumba 16" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 16" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 43.3314, 0.384871, 42.7361)
 
-[node name="tumba 17" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 17" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.7796, 0.384871, 42.9174)
 
-[node name="tumba 18" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 18" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 41.7796, 0.384871, 40.4415)
 
-[node name="tumba 19" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 19" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.4999, 0.384871, 40.4415)
 
-[node name="tumba 20" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 20" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.4999, 0.384871, 41.6582)
 
-[node name="tumba 21" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 21" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.4747, 0.384872, 42.8202)
 
-[node name="tumba 22" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 22" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.908282, 0, 0.418359, 0, 1, 0, -0.418359, 0, 0.908282, 37.127, 1.10499, 46.1122)
 
-[node name="tumba 28" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 28" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.908282, 0, 0.418359, 0, 1, 0, -0.418359, 0, 0.908282, 37.0895, 1.10499, 44.6052)
 
-[node name="tumba 29" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 29" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.908282, 0, 0.418359, 0, 1, 0, -0.418359, 0, 0.908282, 36.154, 1.10499, 42.9165)
 
-[node name="tumba 30" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 30" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.908282, 0, 0.418359, 0, 1, 0, -0.418359, 0, 0.908282, 34.9481, 1.10499, 39.9894)
 
-[node name="tumba 31" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 31" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.908282, 0, 0.418359, 0, 1, 0, -0.418359, 0, 0.908282, 33.6846, 1.10499, 37.3971)
 
-[node name="tumba 32" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 32" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.908282, 0, 0.418359, 0, 1, 0, -0.418359, 0, 0.908282, 32.0723, 1.10499, 34.4924)
 
-[node name="tumba 33" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 33" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.908282, 0, 0.418359, 0, 1, 0, -0.418359, 0, 0.908282, 30.9035, 1.10499, 32.0737)
 
-[node name="tumba 23" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 23" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.908282, 0, 0.418359, 0, 1, 0, -0.418359, 0, 0.908282, 35.8819, 1.10499, 44.1697)
 
-[node name="tumba 24" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 24" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.908282, 0, 0.418359, 0, 1, 0, -0.418359, 0, 0.908282, 34.6389, 1.10499, 41.6602)
 
-[node name="tumba 25" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 25" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.908282, 0, 0.418359, 0, 1, 0, -0.418359, 0, 0.908282, 33.3254, 1.10499, 38.562)
 
-[node name="tumba 26" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 26" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.908282, 0, 0.418359, 0, 1, 0, -0.418359, 0, 0.908282, 32.0645, 1.10499, 36.1604)
 
-[node name="tumba 27" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 27" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.908282, 0, 0.418359, 0, 1, 0, -0.418359, 0, 0.908282, 30.7344, 1.10499, 33.584)
 
-[node name="tumba 34" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 34" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.4881, 1.06439, 15.7069)
 
-[node name="tumba 35" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 35" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.4881, 1.06439, 18.1672)
 
-[node name="tumba 36" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 36" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.4881, 1.06439, 21.5092)
 
-[node name="tumba 37" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 37" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.4881, 1.06439, 24.3018)
 
-[node name="tumba 38" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 38" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.1763, 1.06439, 27.498)
 
-[node name="tumba 39" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 39" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.1322, 1.06439, 30.4344)
 
-[node name="tumba 40" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 40" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0977, 1.06439, 31.3447)
 
-[node name="tumba 41" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 41" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0977, 1.06439, 28.932)
 
-[node name="tumba 42" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 42" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.0977, 1.06439, 25.9026)
 
-[node name="tumba 43" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 43" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.2268, 1.06439, 22.9901)
 
-[node name="tumba 44" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 44" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.2268, 1.06439, 20.0933)
 
-[node name="tumba 45" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 45" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.4903, 1.06439, 17.0281)
 
-[node name="tumba 46" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 46" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8866, 1.05165, 39.0241)
 
-[node name="tumba 52" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 52" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.997192, 0, -0.0748917, 0, 1, 0, 0.0748917, 0, 0.997192, 19.6711, 1.05165, 37.9193)
 
-[node name="tumba 53" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 53" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.997192, 0, -0.0748917, 0, 1, 0, 0.0748917, 0, 0.997192, 19.8334, 1.05165, 35.0575)
 
-[node name="tumba 54" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 54" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.997192, 0, -0.0748917, 0, 1, 0, 0.0748917, 0, 0.997192, 19.8334, 1.05165, 31.8748)
 
-[node name="tumba 55" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 55" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.997192, 0, -0.0748917, 0, 1, 0, 0.0748917, 0, 0.997192, 20.1299, 1.05165, 29.0244)
 
-[node name="tumba 56" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 56" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.997192, 0, -0.0748917, 0, 1, 0, 0.0748917, 0, 0.997192, 20.1299, 1.05165, 25.9963)
 
-[node name="tumba 57" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 57" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.997192, 0, -0.0748917, 0, 1, 0, 0.0748917, 0, 0.997192, 20.1299, 1.05165, 22.9778)
 
-[node name="tumba 47" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 47" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.8866, 1.05165, 36.2819)
 
-[node name="tumba 48" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 48" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.081, 1.05165, 33.4298)
 
-[node name="tumba 49" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 49" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.1483, 1.05165, 30.3238)
 
-[node name="tumba 50" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 50" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.4369, 1.05165, 27.4934)
 
-[node name="tumba 51" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 51" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.1933, 1.05165, 24.649)
 
-[node name="tumba 58" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 58" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.0808, 1.10346, 17.7012)
 
-[node name="tumba 59" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 59" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.4178, 0.361924, 16.7033)
 
-[node name="tumba 60" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 60" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.4178, 0.361924, 17.7258)
 
-[node name="tumba 61" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 61" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.4178, 0.361924, 18.7818)
 
-[node name="tumba 62" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 62" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.9554, 0.361924, 18.9899)
 
-[node name="tumba 63" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 63" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.9554, 0.361924, 16.6145)
 
-[node name="tumba 64" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 64" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.6687, 0.361924, 16.6145)
 
-[node name="tumba 65" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 65" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.6687, 0.361924, 17.872)
 
-[node name="tumba 66" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 66" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.6687, 0.361924, 18.9714)
 
-[node name="tumba 67" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 67" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.6687, 0.361924, 11.9236)
 
-[node name="tumba 69" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 69" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.6687, 0.361924, 9.8797)
 
-[node name="tumba 70" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 70" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.6381, 0.361924, 9.8797)
 
-[node name="tumba 71" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 71" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 31.6381, 0.361924, 11.619)
 
-[node name="tumba 72" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 72" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.8087, 0.361924, 11.619)
 
-[node name="tumba 73" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 73" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32.8087, 0.361924, 10.1218)
 
-[node name="tumba 68" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 68" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.9503, 1.12443, 11.0285)
 
-[node name="tumba 74" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 74" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.1985, 0.357493, 4.5054)
 
-[node name="tumba 83" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 83" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.999708, 0, 0.0241703, 0, 1, 0, -0.0241703, 0, -0.999708, 20.7174, 0.357493, 4.5054)
 
-[node name="tumba 84" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 84" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.999708, 0, 0.0241703, 0, 1, 0, -0.0241703, 0, -0.999708, 20.7174, 0.357493, 2.85785)
 
-[node name="tumba 85" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 85" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.999708, 0, 0.0241703, 0, 1, 0, -0.0241703, 0, -0.999708, 20.7174, 0.357493, 1.2554)
 
-[node name="tumba 86" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 86" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.999708, 0, 0.0241703, 0, 1, 0, -0.0241703, 0, -0.999708, 20.9894, 0.357493, 10.7229)
 
-[node name="tumba 87" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 87" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.999708, 0, 0.0241703, 0, 1, 0, -0.0241703, 0, -0.999708, 20.9894, 0.357493, 12.0066)
 
-[node name="tumba 88" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 88" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.999708, 0, 0.0241703, 0, 1, 0, -0.0241703, 0, -0.999708, 20.9894, 0.357493, 13.0946)
 
-[node name="tumba 89" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 89" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.999708, 0, 0.0241703, 0, 1, 0, -0.0241703, 0, -0.999708, 19.8816, 0.357493, 13.0946)
 
-[node name="tumba 91" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 91" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.999708, 0, 0.0241703, 0, 1, 0, -0.0241703, 0, -0.999708, 19.9088, 0.357493, 10.6763)
 
-[node name="tumba 95" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 95" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 13.2857, 0.357493, 10.6763)
 
-[node name="tumba 96" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 96" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 13.2857, 0.357493, 11.8231)
 
-[node name="tumba 97" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 97" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 13.2857, 0.357493, 9.55125)
 
-[node name="tumba 98" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 98" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 12.2984, 0.357493, 9.55125)
 
-[node name="tumba 99" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 99" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 12.2984, 0.357493, 10.7998)
 
-[node name="tumba 100" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 100" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 12.2984, 0.357493, 11.7998)
 
-[node name="tumba 101" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 101" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 11.3704, 0.357493, 11.7998)
 
-[node name="tumba 102" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 102" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 11.3704, 0.357493, 10.7998)
 
-[node name="tumba 103" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 103" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 11.3704, 0.357493, 9.79983)
 
-[node name="tumba 104" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 104" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 10.3704, 0.357493, 9.79983)
 
-[node name="tumba 105" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 105" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 10.3704, 0.357493, 10.7998)
 
-[node name="tumba 106" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 106" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 10.3704, 0.357493, 11.7998)
 
-[node name="tumba 107" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 107" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.0106114, 0, -0.999944, 0, 1, 0, 0.999944, 0, -0.0106114, 11.3835, 0.357493, 4.51909)
 
-[node name="tumba 109" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 109" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.0106114, 0, -0.999944, 0, 1, 0, 0.999944, 0, -0.0106114, 12.8725, 0.357493, 4.51909)
 
-[node name="tumba 110" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 110" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.0106114, 0, -0.999944, 0, 1, 0, 0.999944, 0, -0.0106114, 12.8725, 0.357493, 2.98702)
 
-[node name="tumba 111" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 111" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.0106114, 0, -0.999944, 0, 1, 0, 0.999944, 0, -0.0106114, 11.2545, 0.357493, 2.98702)
 
-[node name="tumba 112" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 112" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.0106114, 0, -0.999944, 0, 1, 0, 0.999944, 0, -0.0106114, 11.2545, 0.357493, 1.33806)
 
-[node name="tumba 113" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 113" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.0106114, 0, -0.999944, 0, 1, 0, 0.999944, 0, -0.0106114, 12.8205, 0.357493, 1.33806)
 
-[node name="tumba 108" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 108" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 5.24577, 0.357493, 4.65501)
 
-[node name="tumba 120" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 120" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 5.24577, 0.357493, 3.35883)
 
-[node name="tumba 121" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 121" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 5.24577, 0.357493, 2.28103)
 
-[node name="tumba 122" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 122" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 4.26333, 0.357493, 2.65601)
 
-[node name="tumba 123" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 123" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 4.26333, 0.357493, 3.66582)
 
-[node name="tumba 124" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 124" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 4.26333, 0.357493, 4.92548)
 
-[node name="tumba 125" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 125" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 3.30857, 0.357493, 4.92548)
 
-[node name="tumba 126" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 126" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 3.30857, 0.357493, 3.92548)
 
-[node name="tumba 127" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 127" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 3.30857, 0.357493, 2.75038)
 
-[node name="tumba 128" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 128" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 2.23595, 0.357493, 2.75038)
 
-[node name="tumba 129" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 129" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 2.23595, 0.357493, 4.03591)
 
-[node name="tumba 130" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 130" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 2.23595, 0.357493, 5.03368)
 
-[node name="tumba 131" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 131" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999415, 0, 0.0342019, 0, 1, 0, -0.0342019, 0, 0.999415, 2.23595, 0.357493, 5.03368)
 
-[node name="tumba 92" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 92" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.999708, 0, 0.0241703, 0, 1, 0, -0.0241703, 0, -0.999708, 21.97, 0.357493, 10.6763)
 
-[node name="tumba 93" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 93" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.999708, 0, 0.0241703, 0, 1, 0, -0.0241703, 0, -0.999708, 21.97, 0.357493, 12.0003)
 
-[node name="tumba 94" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 94" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.999708, 0, 0.0241703, 0, 1, 0, -0.0241703, 0, -0.999708, 21.97, 0.357493, 13.1725)
 
-[node name="tumba 90" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 90" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.999708, 0, 0.0241703, 0, 1, 0, -0.0241703, 0, -0.999708, 19.8791, 0.357493, 11.7579)
 
-[node name="tumba 75" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 75" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.1985, 0.357493, 2.82567)
 
-[node name="tumba 76" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 76" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.1985, 0.357493, 1.12097)
 
-[node name="tumba 77" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 77" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.1441, 1.10515, 2.96782)
 
-[node name="tumba 78" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 78" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.1441, 1.10515, 4.58442)
 
-[node name="tumba 79" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 79" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.1441, 1.10515, 1.39733)
 
-[node name="tumba 80" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 80" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.321, 1.10515, 1.39733)
 
-[node name="tumba 81" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 81" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.321, 1.10515, 3.03998)
 
-[node name="tumba 82" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 82" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.321, 1.10515, 4.71712)
 
-[node name="tumba 114" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 114" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8768, 1.17233, 2.75941)
 
-[node name="tumba 115" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 115" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8768, 1.17233, 4.23681)
 
-[node name="tumba 116" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 116" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.8768, 1.17233, 1.23681)
 
-[node name="tumba 117" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 117" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2999, 1.17233, 1.23681)
 
-[node name="tumba 118" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 118" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2999, 1.17233, 2.98383)
 
-[node name="tumba 119" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 119" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2999, 1.17233, 4.3502)
 
-[node name="tumba 132" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 132" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.3885, 1.1328, 11.333)
 
-[node name="tumba 133" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 133" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.10147, 1.1328, 11.333)
 
-[node name="tumba 134" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 134" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.58445, 1.1328, 11.333)
 
-[node name="tumba 135" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 135" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.69052, 1.1328, 11.5593)
 
-[node name="tumba 136" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 136" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.13227, 1.1328, 11.5593)
 
-[node name="tumba 137" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 137" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.2338, 0.387781, 38.8195)
 
-[node name="tumba 138" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 138" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.2338, 0.387781, 37.6818)
 
-[node name="tumba 139" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 139" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.2338, 0.387781, 36.6818)
 
-[node name="tumba 140" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 140" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.2338, 0.387781, 36.6818)
 
-[node name="tumba 141" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 141" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.2338, 0.387781, 37.8182)
 
-[node name="tumba 142" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 142" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.2338, 0.387781, 38.8182)
 
-[node name="tumba 143" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 143" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2338, 0.387781, 38.8182)
 
-[node name="tumba 144" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 144" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2338, 0.387781, 37.8182)
 
-[node name="tumba 145" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 145" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2338, 0.387781, 36.8182)
 
-[node name="tumba 146" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 146" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.0886, 0.387781, 36.8182)
 
-[node name="tumba 147" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 147" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.0886, 0.387781, 37.8182)
 
-[node name="tumba 148" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 148" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.0886, 0.387781, 38.8182)
 
-[node name="tumba 149" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 149" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5352, 0.387781, 43.2388)
 
-[node name="tumba 150" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 150" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5352, 0.387781, 44.3304)
 
-[node name="tumba 151" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 151" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.5352, 0.387781, 45.3304)
 
-[node name="tumba 152" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 152" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.0789, 0.387781, 45.3304)
 
-[node name="tumba 153" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 153" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.448, 0.387781, 45.3304)
 
-[node name="tumba 154" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 154" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.448, 0.387781, 44.1597)
 
-[node name="tumba 155" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 155" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.448, 0.387781, 43.0183)
 
-[node name="tumba 156" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 156" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.0776, 0.387781, 43.0183)
 
-[node name="tumba 157" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 157" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.0776, 0.387781, 43.0183)
 
-[node name="tumba 158" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 158" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.0742, 1.12134, 44.1489)
 
-[node name="tumba 159" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 159" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.6273, 0.388886, 48.1354)
 
-[node name="tumba 160" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 160" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.6273, 0.388886, 46.8314)
 
-[node name="tumba 161" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 161" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.6273, 0.388886, 45.5162)
 
-[node name="tumba 162" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 162" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.6653, 0.380007, 44.3218)
 
-[node name="tumba 163" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 163" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.00176279, 0, 0.999998, 0, 1, 0, -0.999998, 0, -0.00176279, 21.0103, 0.380007, 44.0236)
 
-[node name="tumba 164" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 164" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.00176279, 0, 0.999998, 0, 1, 0, -0.999998, 0, -0.00176279, 19.4934, 0.380007, 44.0236)
 
-[node name="tumba 165" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 165" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.00176279, 0, 0.999998, 0, 1, 0, -0.999998, 0, -0.00176279, 17.9349, 0.380007, 44.0236)
 
-[node name="tumba 166" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 166" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.00176279, 0, 0.999998, 0, 1, 0, -0.999998, 0, -0.00176279, 16.4811, 0.380007, 44.0236)
 
-[node name="tumba 167" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 167" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.00176279, 0, 0.999998, 0, 1, 0, -0.999998, 0, -0.00176279, 14.8456, 0.380007, 44.0236)
 
-[node name="tumba 168" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 168" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.00176279, 0, 0.999998, 0, 1, 0, -0.999998, 0, -0.00176279, 15.6065, 0.380007, 45.3667)
 
-[node name="tumba 169" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 169" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.00176279, 0, 0.999998, 0, 1, 0, -0.999998, 0, -0.00176279, 17.2065, 0.380007, 45.3667)
 
-[node name="tumba 170" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 170" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.00176279, 0, 0.999998, 0, 1, 0, -0.999998, 0, -0.00176279, 18.9556, 0.380007, 45.3667)
 
-[node name="tumba 171" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 171" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.00176279, 0, 0.999998, 0, 1, 0, -0.999998, 0, -0.00176279, 20.464, 0.380007, 45.3667)
 
-[node name="tumba 172" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 172" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.00176279, 0, 0.999998, 0, 1, 0, -0.999998, 0, -0.00176279, 19.6416, 0.380007, 47.0203)
 
-[node name="tumba 173" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 173" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.00176279, 0, 0.999998, 0, 1, 0, -0.999998, 0, -0.00176279, 17.763, 0.380007, 47.0203)
 
-[node name="tumba 174" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 174" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.00176279, 0, 0.999998, 0, 1, 0, -0.999998, 0, -0.00176279, 15.8685, 0.380007, 47.0203)
 
-[node name="tumba 175" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 175" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.00176279, 0, 0.999998, 0, 1, 0, -0.999998, 0, -0.00176279, 21.4557, 0.380007, 47.0203)
 
-[node name="tumba 176" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 176" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.996803, 0, -0.0799031, 0, 1, 0, 0.0799031, 0, -0.996803, 14.1865, 0.31833, 45.5548)
 
-[node name="tumba 177" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 177" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.996803, 0, -0.0799031, 0, 1, 0, 0.0799031, 0, -0.996803, 14.1865, 0.31833, 46.825)
 
-[node name="tumba 178" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 178" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.996803, 0, -0.0799031, 0, 1, 0, 0.0799031, 0, -0.996803, 14.1865, 0.31833, 48.2629)
 
-[node name="tumba 179" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 179" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.50819, 0.431806, 48.2923)
 
-[node name="tumba 180" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 180" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.999973, 0, -0.00738272, 0, 1, 0, 0.00738272, 0, -0.999973, 1.95898, 0.431806, 48.2923)
 
-[node name="tumba 181" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 181" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.0366612, 0, 0.999328, 0, 1, 0, -0.999328, 0, 0.0366612, 2.36815, 0.431806, 47.6086)
 
-[node name="tumba 182" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 182" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.613927, 0, 0.789363, 0, 1, 0, -0.789363, 0, 0.613927, 9.36243, 1.1171, 38.7232)
 
-[node name="tumba 198" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 198" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.613927, 0, 0.789363, 0, 1, 0, -0.789363, 0, 0.613927, 8.91991, 1.1171, 43.4428)
 
-[node name="tumba 199" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 199" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.613927, 0, 0.789363, 0, 1, 0, -0.789363, 0, 0.613927, 4.22551, 1.1171, 39.6318)
 
-[node name="tumba 200" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 200" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.613927, 0, 0.789363, 0, 1, 0, -0.789363, 0, 0.613927, 4.22551, 1.1171, 43.289)
 
-[node name="tumba 201" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 201" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(-0.392369, 0, 0.919808, 0, 1, 0, -0.919808, 0, -0.392369, 3.60336, 1.1171, 41.727)
 
-[node name="tumba 202" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 202" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(-0.99869, 0, -0.0511682, 0, 1, 0, 0.0511682, 0, -0.99869, 2.01391, 1.1171, 41.5292)
 
-[node name="tumba 203" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 203" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.0504535, 0, 0.998726, 0, 1, 0, -0.998726, 0, 0.0504535, 4.55302, 1.1171, 44.9871)
 
-[node name="tumba 204" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 204" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.00371751, 0, 0.999993, 0, 1, 0, -0.999993, 0, 0.00371751, 8.46918, 1.1171, 44.9871)
 
-[node name="tumba 185" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 185" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.613927, 0, 0.789363, 0, 1, 0, -0.789363, 0, 0.613927, 4.2496, 1.1171, 34.8054)
 
-[node name="tumba 183" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 183" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.613927, 0, 0.789363, 0, 1, 0, -0.789363, 0, 0.613927, 11.6495, 1.1171, 38.7232)
 
-[node name="tumba 184" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 184" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.613927, 0, 0.789363, 0, 1, 0, -0.789363, 0, 0.613927, 11.312, 1.1171, 36.7577)
 
-[node name="tumba 186" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 186" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.0132292, 0, 0.999913, 0, 1, 0, -0.999913, 0, 0.0132292, 4.90442, 1.27671, 32.32)
 
-[node name="tumba 187" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 187" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.0132292, 0, 0.999913, 0, 1, 0, -0.999913, 0, 0.0132292, 11.0305, 1.27671, 32.32)
 
-[node name="tumba 188" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 188" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.999967, -4.60257e-05, 0.00809814, 3.30037e-05, 0.999999, 0.00161088, -0.0080982, -0.00161056, 0.999966, 13.5034, 1.27671, 35.303)
 
-[node name="tumba 189" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 189" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.999967, -4.60257e-05, 0.00809814, 3.30037e-05, 0.999999, 0.00161088, -0.0080982, -0.00161056, 0.999966, 13.5034, 1.27671, 40.8133)
 
-[node name="tumba 190" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 190" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.999967, -4.60257e-05, 0.00809814, 3.30037e-05, 0.999999, 0.00161088, -0.0080982, -0.00161056, 0.999966, 13.5034, 1.27671, 26.5809)
 
-[node name="tumba 191" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 191" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.999967, -4.60257e-05, 0.00809814, 3.30037e-05, 0.999999, 0.00161088, -0.0080982, -0.00161056, 0.999966, 13.5034, 1.27671, 19.9451)
 
-[node name="tumba 192" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 192" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.845728, 0.000831697, -0.533614, 3.30037e-05, 0.999999, 0.00161088, 0.533615, -0.00137997, 0.845727, 11.154, 1.27671, 19.9293)
 
-[node name="tumba 193" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 193" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.794054, 0.000952982, -0.607846, 3.30037e-05, 0.999999, 0.00161088, 0.607847, -0.00129918, 0.794053, 6.93122, 1.27671, 24.51)
 
-[node name="tumba 194" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 194" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.0754835, -0.00160878, 0.997146, 3.30037e-05, 0.999999, 0.00161088, -0.997147, -8.87076e-05, 0.0754834, 10.2399, 1.27671, 29.3891)
 
-[node name="tumba 196" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 196" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.605044, -0.00130253, 0.796191, 3.30037e-05, 0.999999, 0.00161088, -0.796192, -0.000948395, 0.605043, 9.04454, 1.27671, 26.6224)
 
-[node name="tumba 197" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 197" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.993782, -0.000212144, 0.111347, 3.30036e-05, 0.999999, 0.00161088, -0.111348, -0.00159719, 0.99378, 7.22648, 1.27671, 26.6224)
 
-[node name="tumba 195" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 195" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(-0.00722554, -0.0016106, 0.999973, 3.30037e-05, 0.999999, 0.00161088, -0.999974, 4.46202e-05, -0.00722548, 5.05474, 1.27671, 29.2058)
 
-[node name="tumba 205" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 205" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.772013, 0, -0.635607, 0, 1, 0, 0.635607, 0, 0.772013, 2.16771, 0.978724, 24.1921)
 
-[node name="tumba 206" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 206" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.772013, 0, -0.635607, 0, 1, 0, 0.635607, 0, 0.772013, 6.08096, 0.978724, 19.3565)
 
-[node name="tumba 207" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 207" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.00884864, 0, -0.999961, 0, 1, 0, 0.999961, 0, 0.00884864, 4.09366, 0.978724, 17.6482)
 
-[node name="tumba 209" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 209" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(-0.791181, 0, -0.611582, 0, 1, 0, 0.611582, 0, -0.791181, 3.29009, 0.978724, 19.3044)
 
-[node name="tumba 208" parent="." instance=ExtResource("7_qnhqe")]
+[node name="tumba 208" parent="Tumbas" instance=ExtResource("7_qnhqe")]
 transform = Transform3D(0.999858, 0, -0.0168242, 0, 1, 0, 0.0168242, 0, 0.999858, 0.36238, 0.978724, 20.1946)
 
-[node name="tumba 210" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 210" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.0249207, 0, -0.999689, 0, 1, 0, 0.999689, 0, 0.0249207, 6.49289, 0.372305, 44.8372)
 
-[node name="tumba 211" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 211" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.0249207, 0, -0.999689, 0, 1, 0, 0.999689, 0, 0.0249207, 10.0097, 0.372305, 44.8372)
 
-[node name="tumba 212" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 212" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.0249207, 0, -0.999689, 0, 1, 0, 0.999689, 0, 0.0249207, 3.06363, 0.372305, 44.8372)
 
-[node name="tumba 213" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 213" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.910099, 0, -0.414391, 0, 1, 0, 0.414391, 0, -0.910099, 1.84854, 0.372305, 44.8372)
 
-[node name="tumba 214" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 214" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.910099, 0, -0.414391, 0, 1, 0, 0.414391, 0, -0.910099, 1.84854, 0.372305, 43.3325)
 
-[node name="tumba 215" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 215" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.975461, 0, 0.22017, 0, 1, 0, -0.22017, 0, -0.975461, 1.84854, 0.372305, 40.046)
 
-[node name="tumba 216" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 216" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.975461, 0, 0.22017, 0, 1, 0, -0.22017, 0, -0.975461, 1.84854, 0.372305, 38.7198)
 
-[node name="tumba 217" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 217" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.169212, 0, 0.985579, 0, 1, 0, -0.985579, 0, 0.169212, 3.20911, 0.372305, 38.7198)
 
-[node name="tumba 218" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 218" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.661639, 0, 0.749822, 0, 1, 0, -0.749822, 0, 0.661639, 5.27608, 0.372305, 40.764)
 
-[node name="tumba 219" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 219" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.661639, 0, 0.749822, 0, 1, 0, -0.749822, 0, 0.661639, 6.82518, 0.372305, 41.9774)
 
-[node name="tumba 220" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 220" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.661639, 0, 0.749822, 0, 1, 0, -0.749822, 0, 0.661639, 6.82518, 0.372305, 41.9774)
 
-[node name="tumba 221" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 221" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.661639, 0, 0.749822, 0, 1, 0, -0.749822, 0, 0.661639, 7.63792, 0.372305, 42.8914)
 
-[node name="tumba 222" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 222" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.661639, 0, 0.749822, 0, 1, 0, -0.749822, 0, 0.661639, 7.63792, 0.372305, 43.9353)
 
-[node name="tumba 223" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 223" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.661639, 0, 0.749822, 0, 1, 0, -0.749822, 0, 0.661639, 5.49742, 0.372305, 42.9208)
 
-[node name="tumba 224" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 224" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.661639, 0, 0.749822, 0, 1, 0, -0.749822, 0, 0.661639, 3.08155, 0.372305, 40.3831)
 
-[node name="tumba 225" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 225" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.663404, 0, -0.748261, 0, 1, 0, 0.748261, 0, -0.663404, 7.67204, 0.400516, 37.2933)
 
-[node name="tumba 226" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 226" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.663404, 0, -0.748261, 0, 1, 0, 0.748261, 0, -0.663404, 5.95534, 0.400516, 35.9012)
 
-[node name="tumba 228" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 228" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.663404, 0, -0.748261, 0, 1, 0, 0.748261, 0, -0.663404, 3.39045, 0.400516, 33.9932)
 
-[node name="tumba 229" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 229" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.663404, 0, -0.748261, 0, 1, 0, 0.748261, 0, -0.663404, 2.12706, 0.400516, 32.9932)
 
-[node name="tumba 230" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 230" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.120379, 0, 0.992728, 0, 1, 0, -0.992728, 0, 0.120379, 2.90741, 0.400516, 32.1307)
 
-[node name="tumba 231" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 231" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.120379, 0, 0.992728, 0, 1, 0, -0.992728, 0, 0.120379, 6.41436, 0.400516, 32.1307)
 
-[node name="tumba 232" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 232" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.120379, 0, 0.992728, 0, 1, 0, -0.992728, 0, 0.120379, 7.89261, 0.400516, 32.1307)
 
-[node name="tumba 245" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 245" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.0792248, 0, -0.996857, 0, 1, 0, 0.996857, 0, 0.0792248, 7.89261, 0.400516, 29.2722)
 
-[node name="tumba 246" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 246" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.0792248, 0, -0.996857, 0, 1, 0, 0.996857, 0, 0.0792248, 12.2866, 0.400516, 29.2722)
 
-[node name="tumba 247" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 247" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.0792248, 0, -0.996857, 0, 1, 0, 0.996857, 0, 0.0792248, 13.502, 0.400516, 29.2722)
 
-[node name="tumba 248" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 248" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.0792248, 0, -0.996857, 0, 1, 0, 0.996857, 0, 0.0792248, 6.32945, 0.400516, 29.2722)
 
-[node name="tumba 249" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 249" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.928602, 0, 0.371076, 0, 1, 0, -0.371076, 0, -0.928602, 4.04756, 0.400516, 28.1531)
 
-[node name="tumba 250" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 250" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.79116, 0, 0.61161, 0, 1, 0, -0.61161, 0, -0.79116, 5.34524, 0.400516, 26.6349)
 
-[node name="tumba 251" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 251" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.79116, 0, 0.61161, 0, 1, 0, -0.61161, 0, -0.79116, 8.36755, 0.400516, 23.2582)
 
-[node name="tumba 252" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 252" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.79116, 0, 0.61161, 0, 1, 0, -0.61161, 0, -0.79116, 9.88621, 0.400516, 21.8207)
 
-[node name="tumba 253" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 253" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.79116, 0, 0.61161, 0, 1, 0, -0.61161, 0, -0.79116, 12.2506, 0.400516, 18.3006)
 
-[node name="tumba 254" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 254" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.138966, 0, 0.990297, 0, 1, 0, -0.990297, 0, 0.138966, 13.5703, 0.400516, 17.5471)
 
-[node name="tumba 255" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 255" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999957, 0, -0.00928488, 0, 1, 0, 0.00928488, 0, 0.999957, 13.5703, 0.400516, 18.6576)
 
-[node name="tumba 256" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 256" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999957, 0, -0.00928488, 0, 1, 0, 0.00928488, 0, 0.999957, 13.5703, 0.400516, 21.793)
 
-[node name="tumba 257" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 257" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999957, 0, -0.00928488, 0, 1, 0, 0.00928488, 0, 0.999957, 13.5703, 0.400516, 23.547)
 
-[node name="tumba 258" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 258" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999957, 0, -0.00928488, 0, 1, 0, 0.00928488, 0, 0.999957, 13.5703, 0.400516, 25.0296)
 
-[node name="tumba 259" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 259" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999957, 0, -0.00928488, 0, 1, 0, 0.00928488, 0, 0.999957, 11.7957, 0.400516, 25.934)
 
-[node name="tumba 260" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 260" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999957, 0, -0.00928488, 0, 1, 0, 0.00928488, 0, 0.999957, 11.7957, 0.400516, 24.3834)
 
-[node name="tumba 261" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 261" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999957, 0, -0.00928488, 0, 1, 0, 0.00928488, 0, 0.999957, 11.7957, 0.400516, 22.2654)
 
-[node name="tumba 262" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 262" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999957, 0, -0.00928488, 0, 1, 0, 0.00928488, 0, 0.999957, 11.793, 0.400516, 27.3413)
 
-[node name="tumba 263" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 263" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.74228, 0, 0.67009, 0, 1, 0, -0.67009, 0, -0.74228, 10.4509, 0.400516, 25.2602)
 
-[node name="tumba 264" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 264" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.74228, 0, 0.67009, 0, 1, 0, -0.67009, 0, -0.74228, 8.79246, 0.400516, 25.2602)
 
-[node name="tumba 265" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 265" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.74228, 0, 0.67009, 0, 1, 0, -0.67009, 0, -0.74228, 10.4225, 0.400516, 23.1332)
 
-[node name="tumba 233" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 233" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.120379, 0, 0.992728, 0, 1, 0, -0.992728, 0, 0.120379, 9.25758, 0.400516, 32.1307)
 
-[node name="tumba 234" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 234" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.120379, 0, 0.992728, 0, 1, 0, -0.992728, 0, 0.120379, 12.2715, 0.400516, 32.1307)
 
-[node name="tumba 235" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 235" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.668092, 0, 0.744078, 0, 1, 0, -0.744078, 0, 0.668092, 13.3264, 0.400516, 32.1307)
 
-[node name="tumba 236" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 236" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.9996, 0, -0.0282705, 0, 1, 0, 0.0282705, 0, 0.9996, 13.3264, 0.400516, 33.441)
 
-[node name="tumba 237" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 237" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.988282, 0, 0.152641, 0, 1, 0, -0.152641, 0, 0.988282, 13.3264, 0.400516, 37.1391)
 
-[node name="tumba 238" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 238" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.986358, 0, -0.164617, 0, 1, 0, 0.164617, 0, 0.986358, 13.3264, 0.400516, 39.0231)
 
-[node name="tumba 227" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 227" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.663404, 0, -0.748261, 0, 1, 0, 0.748261, 0, -0.663404, 7.67204, 0.400516, 37.2933)
 
-[node name="tumba 239" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 239" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.663404, 0, -0.748261, 0, 1, 0, 0.748261, 0, -0.663404, 12.7564, 0.139904, 41.5363)
 
-[node name="tumba 240" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 240" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.663404, 0, -0.748261, 0, 1, 0, 0.748261, 0, -0.663404, 11.1488, 0.139904, 39.8358)
 
-[node name="tumba 241" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 241" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.663404, 0, -0.748261, 0, 1, 0, 0.748261, 0, -0.663404, 6.18899, 0.139904, 34.0957)
 
-[node name="tumba 242" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 242" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.663404, 0, -0.748261, 0, 1, 0, 0.748261, 0, -0.663404, 8.528, 0.139904, 35.4424)
 
-[node name="tumba 243" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 243" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.663404, 0, -0.748261, 0, 1, 0, 0.748261, 0, -0.663404, 11.1273, 0.139904, 34.4092)
 
-[node name="tumba 244" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 244" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.663404, 0, -0.748261, 0, 1, 0, 0.748261, 0, -0.663404, 9.27472, 0.139904, 33.5667)
 
-[node name="tumba 266" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 266" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.746952, 0, -0.664878, 0, 1, 0, 0.664878, 0, 0.746952, 3.26373, 0.393572, 23.0838)
 
-[node name="tumba 267" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 267" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.746952, 0, -0.664878, 0, 1, 0, 0.664878, 0, 0.746952, 4.35986, 0.393572, 21.9214)
 
-[node name="tumba 268" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 268" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.746952, 0, -0.664878, 0, 1, 0, 0.664878, 0, 0.746952, 5.51947, 0.393572, 20.6108)
 
-[node name="tumba 269" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 269" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.746952, 0, -0.664878, 0, 1, 0, 0.664878, 0, 0.746952, 7.34381, 0.393572, 18.1931)
 
-[node name="tumba 270" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 270" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.10373, 0, 0.994605, 0, 1, 0, -0.994605, 0, -0.10373, 5.93229, 0.393572, 17.5874)
 
-[node name="tumba 271" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 271" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.10373, 0, 0.994605, 0, 1, 0, -0.994605, 0, -0.10373, 2.0253, 0.393572, 17.5874)
 
-[node name="tumba 272" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 272" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(-0.10373, 0, 0.994605, 0, 1, 0, -0.994605, 0, -0.10373, 0.557046, 0.393572, 17.3507)
 
-[node name="tumba 273" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 273" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999997, 0, -0.00233877, 0, 1, 0, 0.00233877, 0, 0.999997, 0.557046, 0.393572, 18.6048)
 
-[node name="tumba 274" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 274" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999997, 0, -0.00233877, 0, 1, 0, 0.00233877, 0, 0.999997, 0.557046, 0.393572, 21.631)
 
-[node name="tumba 275" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 275" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999997, 0, -0.00233877, 0, 1, 0, 0.00233877, 0, 0.999997, 0.557046, 0.393572, 23.3434)
 
-[node name="tumba 276" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 276" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999997, 0, -0.00233877, 0, 1, 0, 0.00233877, 0, 0.999997, 0.557046, 0.393572, 24.988)
 
-[node name="tumba 277" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 277" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.999997, 0, -0.00233877, 0, 1, 0, 0.00233877, 0, 0.999997, 0.557046, 0.393572, 26.4264)
 
-[node name="tumba 278" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 278" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.716485, 0, -0.697603, 0, 1, 0, 0.697603, 0, 0.716485, 1.34503, 0.393572, 25.481)
 
-[node name="tumba 279" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 279" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.716485, 0, -0.697603, 0, 1, 0, 0.697603, 0, 0.716485, 2.02453, 0.393572, 22.3835)
 
-[node name="tumba 280" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 280" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.716485, 0, -0.697603, 0, 1, 0, 0.697603, 0, 0.716485, 2.02453, 0.393572, 20.2979)
 
-[node name="tumba 281" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 281" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.716485, 0, -0.697603, 0, 1, 0, 0.697603, 0, 0.716485, 3.23298, 0.393572, 20.7568)
 
-[node name="tumba 282" parent="." instance=ExtResource("6_d04bj")]
+[node name="tumba 282" parent="Tumbas" instance=ExtResource("6_d04bj")]
 transform = Transform3D(0.716485, 0, -0.697603, 0, 1, 0, 0.697603, 0, 0.716485, 4.36972, 0.393572, 18.6673)
 
-[connection signal="body_entered" from="Strucutre/Door3/Area3D" to="Strucutre/Door3" method="_on_area_3d_body_entered"]
+[node name="Props" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.4626, 0, 16.0618)
+
+[node name="Arboles" parent="Props" instance=ExtResource("9_keb2p")]
+
+[node name="Arboles10" parent="Props" instance=ExtResource("9_keb2p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.583, 0, -6.37034)
+
+[node name="Arboles11" parent="Props" instance=ExtResource("9_keb2p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.9651, 0, -11.6443)
+
+[node name="Arboles12" parent="Props" instance=ExtResource("9_keb2p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.0112, 0, 0.636158)
+
+[node name="Arboles2" parent="Props" instance=ExtResource("9_keb2p")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 4.43133, 0, 4.90557)
+
+[node name="Arboles7" parent="Props" instance=ExtResource("9_keb2p")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 27.6156, 0, 12.4476)
+
+[node name="Arboles8" parent="Props" instance=ExtResource("9_keb2p")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 27.8382, 0, 24.7237)
+
+[node name="Arboles9" parent="Props" instance=ExtResource("9_keb2p")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 25.6177, 0, 31.4018)
+
+[node name="Arboles3" parent="Props" instance=ExtResource("9_keb2p")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -0.823278, -9.53674e-07, 26.1196)
+
+[node name="Arboles6" parent="Props" instance=ExtResource("9_keb2p")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 7.95728, -9.53674e-07, 16.7812)
+
+[node name="Arboles4" parent="Props" instance=ExtResource("9_keb2p")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -13.1225, -9.53674e-07, 27.2203)
+
+[node name="Arboles5" parent="Props" instance=ExtResource("9_keb2p")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -7.88494, 0, 20.8134)
+
+[node name="cauldron" parent="Props" instance=ExtResource("10_yuxhk")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 21.0935, 0.564756, -11.58)
+
+[node name="cauldron2" parent="Props" instance=ExtResource("10_yuxhk")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 26.2953, 0.564756, 0.547287)
+
+[node name="cauldron3" parent="Props" instance=ExtResource("10_yuxhk")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 6.83517, 0.564756, -1.78253)
+
+[node name="cauldron4" parent="Props" instance=ExtResource("10_yuxhk")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -17.4524, 0.564756, 19.4666)
+
+[node name="detergente 1" parent="Props" instance=ExtResource("11_kadhj")]
+transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, -12.6358, 0.7, 14.618)
+
+[node name="detergente 2" parent="Props" instance=ExtResource("11_kadhj")]
+transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, 4.78432, 0.7, 25.9929)
+
+[node name="detergente 3" parent="Props" instance=ExtResource("11_kadhj")]
+transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, 16.0288, 0.7, 30.6268)
+
+[node name="detergente 4" parent="Props" instance=ExtResource("11_kadhj")]
+transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, 19.476, 0.7, 19.1877)
+
+[node name="detergente 5" parent="Props" instance=ExtResource("11_kadhj")]
+transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, 19.476, 1.95579, 27.2991)
+
+[node name="detergente 6" parent="Props" instance=ExtResource("11_kadhj")]
+transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, 13.5096, 0.848062, 8.46315)
+
+[node name="detergente 7" parent="Props" instance=ExtResource("11_kadhj")]
+transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, 18.0406, 0.848062, -0.453331)
+
+[node name="detergente 8" parent="Props" instance=ExtResource("11_kadhj")]
+transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, 25.8965, 0.848062, -4.73998)
+
+[node name="detergente 9" parent="Props" instance=ExtResource("11_kadhj")]
+transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, 4.05888, 0.848062, -8.90253)
+
+[node name="detergente 10" parent="Props" instance=ExtResource("11_kadhj")]
+transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, -10.1017, 0.848062, -4.68567)
+
+[node name="detergente 11" parent="Props" instance=ExtResource("11_kadhj")]
+transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, -3.31829, 0.848062, 5.91786)
+
+[node name="detergente 12" parent="Props" instance=ExtResource("11_kadhj")]
+transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, -10.8319, 0.848062, -12.788)
+
+[node name="door" parent="." instance=ExtResource("12_ybbg0")]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 24.3136, 2, 47.767)
+script = ExtResource("3_y3kgs")
+
+[node name="Area3D" type="Area3D" parent="door"]
+transform = Transform3D(-4.37114e-10, 0, 0.01, 0, 0.01, 0, -0.01, 0, -4.37114e-10, 0.000173226, -0.00999998, 0.0113669)
+collision_layer = 17
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="door/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.459991, 0.471252, -0.0384369)
+shape = SubResource("BoxShape3D_eaw5y")
+
+[node name="door_frame" parent="door" instance=ExtResource("13_jt3wt")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.00297059, 0, 0.0215552)
+
+[node name="Brujas" type="Node3D" parent="."]
+
+[node name="Bruja" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(-1.2941, 0, -4.82963, 0, 5, 0, 4.82963, 0, -1.2941, 3.22666, 0.654417, 8.68499)
+attack_range = 2.0
+
+[node name="Bruja5" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(-1.2941, 0, -4.82963, 0, 5, 0, 4.82963, 0, -1.2941, 4.33674, 0.654417, 6.49828)
+attack_range = 2.0
+
+[node name="Bruja6" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(1.2941, 0, -4.82963, 0, 5, 0, 4.82963, 0, 1.2941, 1.12463, 0.654417, 27.8393)
+attack_range = 2.0
+
+[node name="Bruja7" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(1.2941, 0, -4.82963, 0, 5, 0, 4.82963, 0, 1.2941, 1.0869, 0.654417, 31.4446)
+attack_range = 2.0
+
+[node name="Bruja8" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(1.2941, 0, -4.82963, 0, 5, 0, 4.82963, 0, 1.2941, 1.09764, 0.654417, 37.1304)
+attack_range = 2.0
+
+[node name="Bruja9" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(2.5, 0, -4.33013, 0, 5, 0, 4.33013, 0, 2.5, 9.1202, 0.654417, 42.1929)
+attack_range = 2.0
+
+[node name="Bruja10" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(2.5, 0, -4.33013, 0, 5, 0, 4.33013, 0, 2.5, 0.760921, 0.654417, 47.5451)
+attack_range = 2.0
+
+[node name="Bruja11" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(2.5, 0, -4.33013, 0, 5, 0, 4.33013, 0, 2.5, 10.7609, 0.654417, 47.5451)
+attack_range = 2.0
+
+[node name="Bruja12" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(4.82963, 0, 1.29409, 0, 5, 0, -1.29409, 0, 4.82963, 26.3743, 0.654417, 47.5451)
+attack_range = 2.0
+
+[node name="Bruja13" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(4.82963, 0, 1.29409, 0, 5, 0, -1.29409, 0, 4.82963, 32.7655, 0.654417, 47.1318)
+attack_range = 2.0
+
+[node name="Bruja14" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(4.82963, 0, 1.29409, 0, 5, 0, -1.29409, 0, 4.82963, 38.4976, 0.766092, 41.9569)
+attack_range = 2.0
+
+[node name="Bruja15" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(2.5, 0, 4.33013, 0, 5, 0, -4.33013, 0, 2.5, 43.9454, 0.574076, 30.6108)
+attack_range = 2.0
+
+[node name="Bruja16" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(2.5, 0, 4.33013, 0, 5, 0, -4.33013, 0, 2.5, 42.9454, 0.574076, 33.6108)
+attack_range = 2.0
+
+[node name="Bruja17" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(4.76837e-07, 0, 5, 0, 5, 0, -5, 0, 4.76837e-07, 44.5776, 0.610627, 14.0833)
+attack_range = 2.0
+
+[node name="Bruja18" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(4.76837e-07, 0, 5, 0, 5, 0, -5, 0, 4.76837e-07, 44.5776, 0.610627, 20.0833)
+attack_range = 2.0
+
+[node name="Bruja19" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(-4.33013, 0, 2.5, 0, 5, 0, -2.5, 0, -4.33013, 42.296, 0.560181, 7.73401)
+attack_range = 2.0
+
+[node name="Bruja20" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(-4.33013, 0, 2.5, 0, 5, 0, -2.5, 0, -4.33013, 37.4899, 0.619353, 5.19679)
+attack_range = 2.0
+
+[node name="Bruja21" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(-4.33013, 0, 2.5, 0, 5, 0, -2.5, 0, -4.33013, 29.5535, 0.702123, 4.47421)
+attack_range = 2.0
+
+[node name="Bruja2" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(-4.33013, 0, -2.5, 0, 5, 0, 2.5, 0, -4.33013, 17.2156, 0.654417, 2.82843)
+attack_range = 2.0
+
+[node name="Bruja3" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(-4.33013, 0, -2.5, 0, 5, 0, 2.5, 0, -4.33013, 15.7816, 0.654417, 4.2011)
+attack_range = 2.0
+
+[node name="Bruja4" parent="Brujas" instance=ExtResource("5_ygojk")]
+transform = Transform3D(-4.33013, 0, -2.5, 0, 5, 0, 2.5, 0, -4.33013, 19.1421, 0.654417, 2.94239)
+attack_range = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, 35, -51)
+mesh = SubResource("SphereMesh_0p0rg")
+
+[node name="Luces" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Luces"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.21838, 3.70173, 6.92104)
+light_color = Color(0.878437, 0.00148454, 0.985836, 1)
+omni_range = 15.504
+
+[node name="OmniLight3D7" type="OmniLight3D" parent="Luces"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.1016, 4.51398, 29.9419)
+light_color = Color(0.959451, 0.686545, 1, 1)
+light_energy = 1.3
+omni_range = 15.504
+
+[node name="OmniLight3D8" type="OmniLight3D" parent="Luces"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.10161, 4.51398, 29.9419)
+light_color = Color(0.959451, 0.686545, 1, 1)
+light_energy = 1.3
+omni_range = 15.504
+
+[node name="OmniLight3D9" type="OmniLight3D" parent="Luces"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.1016, 4.51398, 0.941883)
+light_color = Color(0.959451, 0.686545, 1, 1)
+light_energy = 1.3
+omni_range = 15.504
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Luces"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.2184, 3.70173, 6.92104)
+light_color = Color(0.878437, 0.00148454, 0.985836, 1)
+omni_range = 15.504
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Luces"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2184, 3.70173, 18.921)
+light_color = Color(0.878437, 0.00148454, 0.985836, 1)
+omni_range = 15.504
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Luces"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.2184, 3.70173, 26.921)
+light_color = Color(0.878437, 0.00148454, 0.985836, 1)
+omni_range = 15.504
+
+[node name="OmniLight3D5" type="SpotLight3D" parent="Luces"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 24.0569, 9.47964, 48.735)
+light_color = Color(0.941572, 0.803317, 0, 1)
+light_energy = 16.0
+spot_range = 11.746
+spot_angle = 23.1486
+
+[node name="OmniLight3D6" type="OmniLight3D" parent="Luces"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2184, 3.70173, 38.921)
+light_color = Color(0.878437, 0.00148454, 0.985836, 1)
+omni_range = 15.504

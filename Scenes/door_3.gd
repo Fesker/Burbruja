@@ -1,4 +1,4 @@
-extends MeshInstance3D
+extends Node3D
 
 
 # Called when the node enters the scene tree for the first time.
@@ -13,4 +13,5 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		if body.has_key == true:
 			print("abrir puerta")
+			get_tree().change_scene_to_file("res://pantalla_final.tscn")
 		else: print ("no tenes la llave pa")
