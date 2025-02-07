@@ -10,6 +10,9 @@ var has_key := false
 @onready var camera: Camera3D = %Camera
 
 
+func _ready() -> void:
+	print(has_key)
+
 func move_player(direction) -> void:
 	# Apply horizontal movement
 	if direction:

@@ -5,12 +5,9 @@ extends Node3D
 func _ready() -> void:
 	pass # Replace with function body.
 
-
-
-
-
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
+		print("El jugador entro al area")
 		if body.has_key == true:
 			print("abrir puerta")
 			get_tree().change_scene_to_file("res://pantalla_final.tscn")
