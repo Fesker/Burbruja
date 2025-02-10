@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://clmreqsd4oso0"]
+[gd_scene load_steps=13 format=3 uid="uid://clmreqsd4oso0"]
 
 [ext_resource type="Script" path="res://Scripts/dorothy.gd" id="1_vo8d1"]
 [ext_resource type="PackedScene" uid="uid://bn475m8wkk3d3" path="res://gun.tscn" id="2_8d1si"]
@@ -6,13 +6,23 @@
 [ext_resource type="Script" path="res://Scripts/gun.gd" id="3_wni0g"]
 [ext_resource type="PackedScene" uid="uid://bb23nv32tmbnf" path="res://bubble_projectile.tscn" id="4_i5ngs"]
 [ext_resource type="Texture2D" uid="uid://b4vs15f6o82ur" path="res://Assets/Sprites/crosshair117.png" id="4_nj0ht"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wcbvj"]
+[ext_resource type="PackedScene" uid="uid://dun0hbxgtgfo0" path="res://music_manger.tscn" id="7_dsxod"]
+[ext_resource type="PackedScene" uid="uid://bmiym667dsq7" path="res://HUD.tscn" id="8_w80gf"]
+[ext_resource type="Shader" path="res://chromatic.gdshader" id="9_jdbnh"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_q6i8f"]
 
-[node name="Dorothy" type="CharacterBody3D"]
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_40hu0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6qbgp"]
+shader = ExtResource("9_jdbnh")
+shader_parameter/strength = 0.25
+
+[node name="Dorothy" type="CharacterBody3D" groups=["player"]]
+collision_layer = 2
+collision_mask = 17
 script = ExtResource("1_vo8d1")
+walk_speed = 20.0
 
 [node name="Camera" type="Camera3D" parent="."]
 unique_name_in_owner = true
@@ -28,9 +38,6 @@ projectile_prefab = ExtResource("4_i5ngs")
 [node name="muzzle" type="Marker3D" parent="Camera/Gun"]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.65661e-10, 0.0025704, 0.00783082)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CapsuleShape3D_wcbvj")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_q6i8f")
@@ -58,3 +65,22 @@ expand_mode = 1
 
 [node name="ProjectilesContainer" type="Node3D" parent="."]
 unique_name_in_owner = true
+
+[node name="MusicManger" parent="." instance=ExtResource("7_dsxod")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_40hu0")
+
+[node name="HUD" parent="." node_paths=PackedStringArray("gun") instance=ExtResource("8_w80gf")]
+gun = NodePath("../Camera/Gun")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_6qbgp")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
