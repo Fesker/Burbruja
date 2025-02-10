@@ -6,7 +6,7 @@ extends CharacterBody3D
 @export var attack_damage: int = 20
 @export var attack_cooldown: float = 1.5
 
-@export var life := 5
+@export var life := 3
 
 
 var player: Node3D
@@ -64,8 +64,9 @@ func melee_attack():
 
 func take_damage(damage_amount: int):
 	# Enemy health logic
-	print("Enemy took %d damage" % damage_amount)
+	#print("Enemy took %d damage" % damage_amount)
 	# Add health reduction, death check, etc.
+	pass
 
 
 func _on_timer_timeout() -> void:
@@ -73,11 +74,11 @@ func _on_timer_timeout() -> void:
 
 func recibir_danio() -> void:
 	life -= 1
-	print("VIDA RESTANTE: ", life)
 	if life <= 0:
 		die()
 		
 		
 func die():
+	GM.add_points(1)
 	enemy_died.emit()
 	queue_free()

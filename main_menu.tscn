@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://o81f15pyb636"]
+[gd_scene load_steps=12 format=3 uid="uid://o81f15pyb636"]
 
 [ext_resource type="Script" path="res://main_menu.gd" id="1_ggd3d"]
 [ext_resource type="Texture2D" uid="uid://drncshgfq7nod" path="res://Assets/Sprites/SplasHMENU.png" id="2_h8sxr"]
 [ext_resource type="Texture2D" uid="uid://312nkcp0lpg7" path="res://Assets/Sprites/Jugar UI.png" id="2_l6opr"]
 [ext_resource type="Texture2D" uid="uid://c6t37s1pmxxbj" path="res://Assets/Sprites/Salir UI.png" id="4_mj6dj"]
+[ext_resource type="AudioStream" uid="uid://172p64c5en6w" path="res://Assets/Audio/Burbrujas Main Stage Soundtrack.mp3" id="5_8t23v"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_uma2x"]
 texture = ExtResource("2_l6opr")
@@ -63,6 +64,10 @@ size_flags_vertical = 3
 theme_override_styles/hover = SubResource("StyleBoxTexture_1hnrw")
 theme_override_styles/pressed = SubResource("StyleBoxTexture_3scbg")
 theme_override_styles/normal = SubResource("StyleBoxTexture_5unkb")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_8t23v")
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="VBoxContainer/Quit" to="." method="_on_quit_pressed"]
