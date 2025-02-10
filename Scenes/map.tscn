@@ -9,7 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cow8waob6as5p" path="res://tumba_1.tscn" id="7_qnhqe"]
 [ext_resource type="PackedScene" uid="uid://cka73ixxpf5hq" path="res://Assets/Arboles.fbx" id="9_keb2p"]
 [ext_resource type="PackedScene" uid="uid://di22ftkc8m11r" path="res://Assets/cauldron.fbx" id="10_yuxhk"]
-[ext_resource type="PackedScene" uid="uid://cbinvh6iljoau" path="res://Assets/detergente 1.fbx" id="11_kadhj"]
+[ext_resource type="AudioStream" uid="uid://4op815y4gfpy" path="res://Assets/Audio/door_unlock.mp3" id="11_q70va"]
+[ext_resource type="PackedScene" uid="uid://bp8q156yf3w0m" path="res://detergente.tscn" id="12_pkulh"]
 [ext_resource type="PackedScene" uid="uid://bnotmg3sdlrpk" path="res://Assets/door.fbx" id="12_ybbg0"]
 [ext_resource type="PackedScene" uid="uid://xtac046v0rgo" path="res://Assets/door_frame.fbx" id="13_jt3wt"]
 
@@ -24,9 +25,10 @@ sky_material = SubResource("ProceduralSkyMaterial_cyt20")
 background_mode = 1
 sky = SubResource("Sky_4e30j")
 tonemap_mode = 2
-glow_enabled = true
 fog_enabled = true
-fog_light_color = Color(0.34838, 0.00050879, 0.459709, 1)
+fog_mode = 1
+fog_light_color = Color(0.813725, 0.627451, 1, 1)
+fog_density = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bt16q"]
 albedo_color = Color(0.257741, 0.144362, 0.0759742, 1)
@@ -166,17 +168,19 @@ height = 2.74635
 [sub_resource type="SphereShape3D" id="SphereShape3D_ohdor"]
 radius = 0.0651016
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_sqtf3"]
-radius = 0.0549362
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ntsv"]
+albedo_color = Color(1, 0.432238, 0.122549, 1)
+emission_enabled = true
+emission = Color(1, 0.352941, 0, 1)
+emission_energy_multiplier = 0.41
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_svj5o"]
-radius = 0.0636208
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_8x1xe"]
-radius = 0.0619681
+[sub_resource type="CylinderMesh" id="CylinderMesh_ycwcm"]
+material = SubResource("StandardMaterial3D_6ntsv")
+top_radius = 0.4
+bottom_radius = 0.4
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_eaw5y"]
-size = Vector3(0.922244, 2.42805, 2.6284)
+size = Vector3(1.56268, 2.42805, 2.6284)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q1kce"]
 emission_enabled = true
@@ -195,7 +199,7 @@ key_locations = [NodePath("KeySpawners/KeyLocation2"), NodePath("KeySpawners/Key
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.821149, -0.567483, 0.0606463, 0, 0.106264, 0.994338, -0.570714, 0.8165, -0.0872586, -3.97913, 19.3788, 0)
-light_color = Color(0.593084, 0.000220631, 0.581084, 1)
+light_color = Color(0.514659, 0.00191666, 0.741815, 1)
 light_energy = 0.129
 shadow_enabled = true
 
@@ -2323,65 +2327,141 @@ transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 21.0935, 0.564756, -11.58)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Props/cauldron/StaticBody3D"]
 shape = SubResource("SphereShape3D_ohdor")
 
+[node name="CauldronLight" type="SpotLight3D" parent="Props/cauldron"]
+transform = Transform3D(0.1, 0, 0, 0, 1.31134e-08, 0.1, 0, -0.1, 1.31134e-08, 0.00382805, 0.214836, -0.000268459)
+light_color = Color(1, 0.664792, 0.240196, 1)
+spot_angle = 24.11
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Props/cauldron"]
+transform = Transform3D(0.1, 0, 0, 0, -0.0237337, 8.74228e-09, 0, -2.07486e-09, -0.1, 0.00119686, 0.033172, -0.00026843)
+mesh = SubResource("CylinderMesh_ycwcm")
+skeleton = NodePath("../CauldronLight")
+
 [node name="cauldron2" parent="Props" instance=ExtResource("10_yuxhk")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 26.2953, 0.564756, 0.547287)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 6.50789, 0.564756, -2.09992)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Props/cauldron2"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Props/cauldron2/StaticBody3D"]
-shape = SubResource("SphereShape3D_sqtf3")
+shape = SubResource("SphereShape3D_ohdor")
+
+[node name="CauldronLight" type="SpotLight3D" parent="Props/cauldron2"]
+transform = Transform3D(0.1, 0, 0, 0, 1.31134e-08, 0.1, 0, -0.1, 1.31134e-08, 0.00382805, 0.214836, -0.000268459)
+light_color = Color(1, 0.664792, 0.240196, 1)
+spot_angle = 24.11
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Props/cauldron2"]
+transform = Transform3D(0.1, 0, 0, 0, -0.0237337, 8.74228e-09, 0, -2.07486e-09, -0.1, 0.00119686, 0.033172, -0.00026843)
+mesh = SubResource("CylinderMesh_ycwcm")
+skeleton = NodePath("../CauldronLight")
 
 [node name="cauldron3" parent="Props" instance=ExtResource("10_yuxhk")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 6.83517, 0.564756, -1.78253)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -1.52937, 0.564756, -3.80957)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Props/cauldron3"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Props/cauldron3/StaticBody3D"]
-shape = SubResource("SphereShape3D_svj5o")
+shape = SubResource("SphereShape3D_ohdor")
+
+[node name="CauldronLight" type="SpotLight3D" parent="Props/cauldron3"]
+transform = Transform3D(0.1, 0, 0, 0, 1.31134e-08, 0.1, 0, -0.1, 1.31134e-08, 0.00382805, 0.214836, -0.000268459)
+light_color = Color(1, 0.664792, 0.240196, 1)
+spot_angle = 24.11
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Props/cauldron3"]
+transform = Transform3D(0.1, 0, 0, 0, -0.0237337, 8.74228e-09, 0, -2.07486e-09, -0.1, 0.00119686, 0.033172, -0.00026843)
+mesh = SubResource("CylinderMesh_ycwcm")
+skeleton = NodePath("../CauldronLight")
 
 [node name="cauldron4" parent="Props" instance=ExtResource("10_yuxhk")]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -17.6698, 0.564756, 19.2356)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -16.31, 0.564756, 0.237362)
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Props/cauldron4"]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Props/cauldron4/StaticBody3D"]
-shape = SubResource("SphereShape3D_8x1xe")
+shape = SubResource("SphereShape3D_ohdor")
 
-[node name="detergente 1" parent="Props" instance=ExtResource("11_kadhj")]
-transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, -12.6358, 0.7, 14.618)
+[node name="CauldronLight" type="SpotLight3D" parent="Props/cauldron4"]
+transform = Transform3D(0.1, 0, 0, 0, 1.31134e-08, 0.1, 0, -0.1, 1.31134e-08, 0.00382805, 0.214836, -0.000268459)
+light_color = Color(1, 0.664792, 0.240196, 1)
+spot_angle = 24.11
 
-[node name="detergente 2" parent="Props" instance=ExtResource("11_kadhj")]
-transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, 4.78432, 0.7, 25.9929)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Props/cauldron4"]
+transform = Transform3D(0.1, 0, 0, 0, -0.0237337, 8.74228e-09, 0, -2.07486e-09, -0.1, 0.00119686, 0.033172, -0.00026843)
+mesh = SubResource("CylinderMesh_ycwcm")
+skeleton = NodePath("../CauldronLight")
 
-[node name="detergente 3" parent="Props" instance=ExtResource("11_kadhj")]
-transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, 16.0288, 0.7, 30.6268)
+[node name="cauldron5" parent="Props" instance=ExtResource("10_yuxhk")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -16.7483, 0.564756, 19.172)
 
-[node name="detergente 4" parent="Props" instance=ExtResource("11_kadhj")]
-transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, 19.476, 0.7, 19.1877)
+[node name="StaticBody3D" type="StaticBody3D" parent="Props/cauldron5"]
 
-[node name="detergente 5" parent="Props" instance=ExtResource("11_kadhj")]
-transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, 19.476, 1.95579, 27.2991)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/cauldron5/StaticBody3D"]
+shape = SubResource("SphereShape3D_ohdor")
 
-[node name="detergente 6" parent="Props" instance=ExtResource("11_kadhj")]
-transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, 13.5096, 0.848062, 8.46315)
+[node name="CauldronLight" type="SpotLight3D" parent="Props/cauldron5"]
+transform = Transform3D(0.1, 0, 0, 0, 1.31134e-08, 0.1, 0, -0.1, 1.31134e-08, 0.00382805, 0.214836, -0.000268459)
+light_color = Color(1, 0.664792, 0.240196, 1)
+spot_angle = 24.11
 
-[node name="detergente 7" parent="Props" instance=ExtResource("11_kadhj")]
-transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, 18.0406, 0.848062, -0.453331)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Props/cauldron5"]
+transform = Transform3D(0.1, 0, 0, 0, -0.0237337, 8.74228e-09, 0, -2.07486e-09, -0.1, 0.00119686, 0.033172, -0.00026843)
+mesh = SubResource("CylinderMesh_ycwcm")
+skeleton = NodePath("../CauldronLight")
 
-[node name="detergente 8" parent="Props" instance=ExtResource("11_kadhj")]
-transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, 25.8965, 0.848062, -4.73998)
+[node name="cauldron6" parent="Props" instance=ExtResource("10_yuxhk")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, -5.24393, 0.564756, 29.8791)
 
-[node name="detergente 9" parent="Props" instance=ExtResource("11_kadhj")]
-transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, 4.05888, 0.848062, -8.90253)
+[node name="StaticBody3D" type="StaticBody3D" parent="Props/cauldron6"]
 
-[node name="detergente 10" parent="Props" instance=ExtResource("11_kadhj")]
-transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, -10.1017, 0.848062, -4.68567)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/cauldron6/StaticBody3D"]
+shape = SubResource("SphereShape3D_ohdor")
 
-[node name="detergente 11" parent="Props" instance=ExtResource("11_kadhj")]
-transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, -3.31829, 0.848062, 5.91786)
+[node name="CauldronLight" type="SpotLight3D" parent="Props/cauldron6"]
+transform = Transform3D(0.1, 0, 0, 0, 1.31134e-08, 0.1, 0, -0.1, 1.31134e-08, 0.00382805, 0.214836, -0.000268459)
+light_color = Color(1, 0.664792, 0.240196, 1)
+spot_angle = 24.11
 
-[node name="detergente 12" parent="Props" instance=ExtResource("11_kadhj")]
-transform = Transform3D(0.0542632, 0, -0.083997, 0, 0.1, 0, 0.083997, 0, 0.0542632, -10.8319, 0.848062, -12.788)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Props/cauldron6"]
+transform = Transform3D(0.1, 0, 0, 0, -0.0237337, 8.74228e-09, 0, -2.07486e-09, -0.1, 0.00119686, 0.033172, -0.00026843)
+mesh = SubResource("CylinderMesh_ycwcm")
+skeleton = NodePath("../CauldronLight")
+
+[node name="cauldron7" parent="Props" instance=ExtResource("10_yuxhk")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 9.8037, 0.564756, 18.0641)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Props/cauldron7"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/cauldron7/StaticBody3D"]
+shape = SubResource("SphereShape3D_ohdor")
+
+[node name="CauldronLight" type="SpotLight3D" parent="Props/cauldron7"]
+transform = Transform3D(0.1, 0, 0, 0, 1.31134e-08, 0.1, 0, -0.1, 1.31134e-08, 0.00382805, 0.214836, -0.000268459)
+light_color = Color(1, 0.664792, 0.240196, 1)
+spot_angle = 24.11
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Props/cauldron7"]
+transform = Transform3D(0.1, 0, 0, 0, -0.0237337, 8.74228e-09, 0, -2.07486e-09, -0.1, 0.00119686, 0.033172, -0.00026843)
+mesh = SubResource("CylinderMesh_ycwcm")
+skeleton = NodePath("../CauldronLight")
+
+[node name="cauldron8" parent="Props" instance=ExtResource("10_yuxhk")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 22.6595, 0.564755, 31.0056)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Props/cauldron8"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Props/cauldron8/StaticBody3D"]
+shape = SubResource("SphereShape3D_ohdor")
+
+[node name="CauldronLight" type="SpotLight3D" parent="Props/cauldron8"]
+transform = Transform3D(0.1, 0, 0, 0, 1.31134e-08, 0.1, 0, -0.1, 1.31134e-08, 0.00382805, 0.214836, -0.000268459)
+light_color = Color(1, 0.664792, 0.240196, 1)
+spot_angle = 24.11
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Props/cauldron8"]
+transform = Transform3D(0.1, 0, 0, 0, -0.0237337, 8.74228e-09, 0, -2.07486e-09, -0.1, 0.00119686, 0.033172, -0.00026843)
+mesh = SubResource("CylinderMesh_ycwcm")
+skeleton = NodePath("../CauldronLight")
 
 [node name="door" parent="." instance=ExtResource("12_ybbg0")]
 transform = Transform3D(-99.7316, 0, -7.32207, 0, 100, 0, 7.32207, 0, -99.7316, 23.7161, 2, 49.9587)
@@ -2393,11 +2473,14 @@ collision_layer = 17
 collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="door/Area3D"]
-transform = Transform3D(1, 0, 1.00583e-06, 0, 1, 0, -1.00583e-06, 0, 1, 0.495926, 0.117853, -0.212416)
+transform = Transform3D(1, 0, 1.00583e-06, 0, 1, 0, -1.00583e-06, 0, 1, 0.175701, 0.117853, -0.212414)
 shape = SubResource("BoxShape3D_eaw5y")
 
 [node name="door_frame" parent="door" instance=ExtResource("13_jt3wt")]
 transform = Transform3D(-2.98023e-08, 0, 1, 0, 1, 0, -1, 0, -2.98023e-08, -0.00280456, 0, 0.0192936)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="door"]
+stream = ExtResource("11_q70va")
 
 [node name="Brujas" type="Node3D" parent="."]
 
@@ -2493,52 +2576,85 @@ mesh = SubResource("SphereMesh_0p0rg")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Luces"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.21838, 3.70173, 6.92104)
-light_color = Color(0.878437, 0.00148454, 0.985836, 1)
+light_color = Color(0.478752, 0.2616, 1, 1)
 omni_range = 15.504
 
 [node name="OmniLight3D7" type="OmniLight3D" parent="Luces"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.1016, 4.51398, 29.9419)
-light_color = Color(0.959451, 0.686545, 1, 1)
+light_color = Color(0.478752, 0.2616, 1, 1)
 light_energy = 1.3
 omni_range = 15.504
 
 [node name="OmniLight3D8" type="OmniLight3D" parent="Luces"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.10161, 4.51398, 29.9419)
-light_color = Color(0.959451, 0.686545, 1, 1)
+light_color = Color(0.478752, 0.2616, 1, 1)
 light_energy = 1.3
 omni_range = 15.504
 
 [node name="OmniLight3D9" type="OmniLight3D" parent="Luces"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.1016, 4.51398, 0.941883)
-light_color = Color(0.959451, 0.686545, 1, 1)
+light_color = Color(0.478752, 0.2616, 1, 1)
 light_energy = 1.3
 omni_range = 15.504
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="Luces"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37.2184, 3.70173, 6.92104)
-light_color = Color(0.878437, 0.00148454, 0.985836, 1)
+light_color = Color(0.478752, 0.2616, 1, 1)
 omni_range = 15.504
 
 [node name="OmniLight3D3" type="OmniLight3D" parent="Luces"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2184, 3.70173, 18.921)
-light_color = Color(0.878437, 0.00148454, 0.985836, 1)
+light_color = Color(0.478752, 0.2616, 1, 1)
 omni_range = 15.504
 
 [node name="OmniLight3D4" type="OmniLight3D" parent="Luces"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40.2184, 3.70173, 26.921)
-light_color = Color(0.878437, 0.00148454, 0.985836, 1)
+light_color = Color(0.478752, 0.2616, 1, 1)
 omni_range = 15.504
 
 [node name="OmniLight3D5" type="SpotLight3D" parent="Luces"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 24.0569, 9.47964, 48.735)
-light_color = Color(0.941572, 0.803317, 0, 1)
-light_energy = 16.0
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 24.0569, 12.5087, 46.9206)
+light_color = Color(1, 0.2616, 0.2616, 1)
+light_energy = 75.52
 spot_range = 11.746
 spot_angle = 23.1486
 
 [node name="OmniLight3D6" type="OmniLight3D" parent="Luces"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.2184, 3.70173, 38.921)
-light_color = Color(0.878437, 0.00148454, 0.985836, 1)
+light_color = Color(0.478752, 0.2616, 1, 1)
 omni_range = 15.504
+
+[node name="Detergent" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.419212, 0)
+
+[node name="Detergente" parent="Detergent" instance=ExtResource("12_pkulh")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 37.8765, 0, 42.795)
+
+[node name="Detergente2" parent="Detergent" instance=ExtResource("12_pkulh")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 30.8765, 0, 42.795)
+
+[node name="Detergente4" parent="Detergent" instance=ExtResource("12_pkulh")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 11.6101, 1.90735e-06, 47.2831)
+
+[node name="Detergente5" parent="Detergent" instance=ExtResource("12_pkulh")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 4.8433, 3.8147e-06, 43.9236)
+
+[node name="Detergente6" parent="Detergent" instance=ExtResource("12_pkulh")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 4.8433, 3.8147e-06, 30.9236)
+
+[node name="Detergente7" parent="Detergent" instance=ExtResource("12_pkulh")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 4.8433, 3.8147e-06, 14.1862)
+
+[node name="Detergente9" parent="Detergent" instance=ExtResource("12_pkulh")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 25.8433, 3.8147e-06, 8.18617)
+
+[node name="Detergente10" parent="Detergent" instance=ExtResource("12_pkulh")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 45.4412, 1.90735e-06, 34.8442)
+
+[node name="Detergente11" parent="Detergent" instance=ExtResource("12_pkulh")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 44.8576, 1.90735e-06, 10.0551)
+
+[node name="Detergente8" parent="Detergent" instance=ExtResource("12_pkulh")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 14.244, 3.8147e-06, 13.9407)
 
 [connection signal="body_entered" from="door/Area3D" to="door" method="_on_area_3d_body_entered"]

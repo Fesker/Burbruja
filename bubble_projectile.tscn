@@ -25,6 +25,7 @@ material = SubResource("StandardMaterial3D_1opo8")
 top_level = true
 script = ExtResource("1_genpp")
 speed = 20
+popAudio = ExtResource("2_lidrt")
 fireAudio = ExtResource("2_lidrt")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -40,4 +41,10 @@ collision_mask = 5
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" groups=["player_projectile"]]
 shape = SubResource("SphereShape3D_fqudp")
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

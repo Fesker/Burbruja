@@ -37,19 +37,93 @@ text = "Felicitaciones, Lograste escapar!"
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -78.0
+offset_top = -115.0
+offset_right = 78.0
+offset_bottom = -76.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_ffx6c")
+theme_override_font_sizes/font_size = 24
+text = "Reiniciar"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -38.0
-offset_top = -15.5
-offset_right = 38.0
-offset_bottom = 15.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("1_ffx6c")
-theme_override_font_sizes/font_size = 30
-text = "Reiniciar"
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+modulate = Color(0.495098, 0.495098, 0.495098, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Arte 2D / 3D"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Ana-VHS, Yepez"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+modulate = Color(0.495098, 0.495098, 0.495098, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Programación"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Lorenso, Fesker"
+horizontal_alignment = 1
+
+[node name="Label5" type="Label" parent="VBoxContainer"]
+modulate = Color(0.495098, 0.495098, 0.495098, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Level Design"
+horizontal_alignment = 1
+
+[node name="Label6" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Lorenso"
+horizontal_alignment = 1
+
+[node name="Label7" type="Label" parent="VBoxContainer"]
+modulate = Color(0.495098, 0.495098, 0.495098, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Game Design"
+horizontal_alignment = 1
+
+[node name="Label8" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Ana-VHS, Yepez, Lorenso, Fesker"
+horizontal_alignment = 1
+
+[node name="Label9" type="Label" parent="VBoxContainer"]
+modulate = Color(0.495098, 0.495098, 0.495098, 1)
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "SFX / BMG"
+horizontal_alignment = 1
+
+[node name="Label10" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "DJ_Scihacker"
+horizontal_alignment = 1
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

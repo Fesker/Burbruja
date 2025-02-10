@@ -5,13 +5,13 @@ class_name Dorothy extends CharacterBody3D
 @export var sprint_speed : float = 8.0
 
 var current_speed : float = walk_speed
+var health : float
+var max_health : float = 100
 
 var has_key := false
 @onready var camera: Camera3D = %Camera
+@onready var gun: Gun = %Gun
 
-
-func _ready() -> void:
-	print(has_key)
 
 func move_player(direction) -> void:
 	# Apply horizontal movement
@@ -29,3 +29,7 @@ func _unhandled_input(event):
 	if event is InputEventKey:
 		if event.pressed and event.keycode == KEY_ESCAPE:
 			get_tree().quit()
+
+
+func on_damage_taken():
+	health -= 10

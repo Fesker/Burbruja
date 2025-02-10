@@ -8,13 +8,11 @@ class_name Projectile extends Node3D
 
 @onready var audio_player: AudioStreamPlayer3D = %ProjectileAudio
 
-var projectile_timer = Timer.new()
 var direction
 
 func _ready() -> void:
 	audio_player.stream = fireAudio
 	audio_player.play()
-	setup_timer()
 
 
 func set_direction(new_direction):
@@ -25,14 +23,19 @@ func _process(delta: float) -> void:
 	position += direction * speed * delta
 	
 
-func setup_timer() -> void:
-	add_child(projectile_timer)
-	projectile_timer.wait_time = lifeTime
-	projectile_timer.one_shot = true  # Only trigger once
-	projectile_timer.start()
-	projectile_timer.timeout.connect(func(): queue_free())
 
+func destruir_burbuja() -> void:
+	audio_player.stream = popAudio
+	audio_player.pitch_scale *= 1.3
+	audio_player.play()
+	await audio_player.finished
+	queue_free()
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("enemy"):
+		destruir_burbuja()
 		body.recibir_danio()
+
+
+func _on_timer_timeout() -> void:
+	destruir_burbuja()
